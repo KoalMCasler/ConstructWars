@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8479158863182342663
 Transform:
   m_ObjectHideFlags: 0
@@ -306,16 +306,15 @@ MonoBehaviour:
   Player: {fileID: 7836895274306562955}
   Crosshair: {fileID: 3355518279327627427}
   ProjectilePrefab: {fileID: 57947921772647646, guid: c51e09dd7339b1746a7bd6e5cd2ff2ee, type: 3}
+  firePoint: {fileID: 2027053307306251050}
+  rb: {fileID: 6509125140059652257}
   moveSpeed: 5
   maxMoveSpeed: 10
-  rb: {fileID: 6509125140059652257}
-  currentHP: 0
-  maxHP: 5
-  startHP: 3
   ShotTimer: 0
-  ShotDelay: 5
-  firePoint: {fileID: 2027053307306251050}
-  fireForce: 5
+  ShotDelay: 2
+  fireForce: 15
+  currentHP: 0
+  maxHP: 400
 --- !u!114 &5899879158270466040
 MonoBehaviour:
   m_ObjectHideFlags: 0

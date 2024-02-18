@@ -128,7 +128,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   Crosshair: {fileID: 0}
+  ExplodePreFab: {fileID: 8632480080141618762, guid: 9d2e8a95b078ed24da0471466d39cd45, type: 3}
   speed: 0
+  shotLife: 0
 --- !u!58 &1820460750199644567
 CircleCollider2D:
   m_ObjectHideFlags: 0
