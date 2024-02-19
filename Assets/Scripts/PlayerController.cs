@@ -111,4 +111,12 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene(0);
         }
     }
+    public float ReturnCurrentHP()
+    {
+        return currentHP;
+    }
+    public float ReturnMaxHP()
+    {
+        return maxHP;
+    }
 }
