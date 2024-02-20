@@ -119,4 +119,8 @@ public class PlayerController : MonoBehaviour
     {
         return maxHP;
     }
+    void OnLook(InputValue lookValue)
+    {
+        //mousePosition += lookValue.Get<Vector2>();
+    }
 }

@@ -13,12 +13,17 @@ public class Projectile : MonoBehaviour
     public float speed;
     private Rigidbody2D rb;
     public int shotLife;
+    public int maxShotLife;
     // Start is called before the first frame update
     void Start()
     {
-        if(shotLife <= 0)
+        if(maxShotLife <= 0)
         {
-            shotLife = 6;
+            maxShotLife = 6;
+        }
+        if(shotLife <= maxShotLife)
+        {
+            shotLife = maxShotLife;
         }
         player = GameObject.FindWithTag("Player");
         Crosshair = GameObject.FindWithTag("Crosshair");
