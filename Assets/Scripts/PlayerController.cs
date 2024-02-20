@@ -47,10 +47,10 @@ public class PlayerController : MonoBehaviour
         //Checks to make sure player is not dead.
         CheckStatus();
         //Countdown for shot delay
-        ShotTimer -= Time.deltaTime;
-        if(ShotTimer == 0)
+        ShotTimer += Time.deltaTime;
+        if(ShotTimer > ShotDelay)
         {
-            ShotTimer = 0;
+            ShotTimer = ShotDelay;
         }
         //Mouse input, Moves Crosshair to mouse position
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -76,10 +76,10 @@ public class PlayerController : MonoBehaviour
     void OnFire()
     {
         //Lets shot only take place if cooldown has happened
-        if(ShotTimer <= 0)
+        if(ShotTimer >= ShotDelay)
         {
             //Resets shot timer
-            ShotTimer = ShotDelay;
+            ShotTimer = 0
             //Creates and fires projectile
             GameObject Projectile = Instantiate(ProjectilePrefab, firePoint.position, firePoint.rotation);
             Projectile.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce);

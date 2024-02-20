@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     public int killCount;
     private string killCountText;
     public int totalEnemies;
+    public Slider shotCoolDownSlider;
     void Start()
     {
         player = GameObject.FindWithTag("Player");
