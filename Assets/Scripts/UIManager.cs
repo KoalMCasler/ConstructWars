@@ -18,12 +18,15 @@ public class UIManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         healthBar.maxValue = player.GetComponent<PlayerController>().ReturnMaxHP();
         healthBar.value = player.GetComponent<PlayerController>().ReturnCurrentHP();
+        shotCoolDownSlider.maxValue = player.GetComponent<PlayerController>().ReturneShotDelay();
     }
     void Update()
     {
+        shotCoolDownSlider.maxValue = player.GetComponent<PlayerController>().ReturneShotDelay();
         healthBar.value = player.GetComponent<PlayerController>().ReturnCurrentHP();
         killCountText = string.Format("Remaining Enemies\n\n{0}/{1} ",killCount,totalEnemies);
         killCountObject.text = killCountText;
+        shotCoolDownSlider.value = player.GetComponent<PlayerController>().ReturneShotTimer();
     }
     public void UpdateKillCount()
     {

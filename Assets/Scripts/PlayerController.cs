@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private float activeMoveSpeed;
     Vector2 moveDirection;
     //Attack/Aim Varables
+    public GameObject[] spellArray;
     Vector2 mousePosition;
     public float ShotTimer;
     public float ShotDelay; //In seconds.
@@ -39,6 +40,7 @@ public class PlayerController : MonoBehaviour
         //Deactivate Cursor
         Cursor.visible = false;
         Crosshair.SetActive(true);
+        ShotDelay = spellArray[0].GetComponent<Spell>().shotDelay;
     }
 
     // Update is called once per frame
@@ -79,7 +81,7 @@ public class PlayerController : MonoBehaviour
         if(ShotTimer >= ShotDelay)
         {
             //Resets shot timer
-            ShotTimer = 0
+            ShotTimer = 0;
             //Creates and fires projectile
             GameObject Projectile = Instantiate(ProjectilePrefab, firePoint.position, firePoint.rotation);
             Projectile.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce);
@@ -122,5 +124,13 @@ public class PlayerController : MonoBehaviour
     void OnLook(InputValue lookValue)
     {
         //mousePosition += lookValue.Get<Vector2>();
+    }
+    public float ReturneShotDelay()
+    {
+        return ShotDelay;
+    }
+    public float ReturneShotTimer()
+    {
+        return ShotTimer;
     }
 }
