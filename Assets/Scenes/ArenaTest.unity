@@ -257,28 +257,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
---- !u!114 &336005032 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1114239314909332855, guid: cf12bf4c185011642baa69b1b7022450, type: 3}
-  m_PrefabInstance: {fileID: 3096843760690414048}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &364140617 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8942572977282603872, guid: cf12bf4c185011642baa69b1b7022450, type: 3}
-  m_PrefabInstance: {fileID: 3096843760690414048}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &403983328
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,17 +387,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &416485478 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7851617537948406605, guid: cf12bf4c185011642baa69b1b7022450, type: 3}
-  m_PrefabInstance: {fileID: 3096843760690414048}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &504315049
 GameObject:
   m_ObjectHideFlags: 0
@@ -1028,17 +995,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1020241241 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 609675569364583411, guid: cf12bf4c185011642baa69b1b7022450, type: 3}
-  m_PrefabInstance: {fileID: 3096843760690414048}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1132184612 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1003276220384662388, guid: cf12bf4c185011642baa69b1b7022450, type: 3}
@@ -1209,17 +1165,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1673649168 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2208532359853738319, guid: cf12bf4c185011642baa69b1b7022450, type: 3}
-  m_PrefabInstance: {fileID: 3096843760690414048}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1798866651
 GameObject:
   m_ObjectHideFlags: 0
@@ -1350,17 +1295,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1978807243 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6973369078370914585, guid: cf12bf4c185011642baa69b1b7022450, type: 3}
-  m_PrefabInstance: {fileID: 3096843760690414048}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &3096843760690414048
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1369,6 +1303,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 662738700829359516, guid: cf12bf4c185011642baa69b1b7022450, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 1003276220384662388, guid: cf12bf4c185011642baa69b1b7022450, type: 3}
       propertyPath: m_LocalPosition.x
       value: -13.27
@@ -1409,34 +1347,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1838784749629919278, guid: cf12bf4c185011642baa69b1b7022450, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2213446186751897754, guid: cf12bf4c185011642baa69b1b7022450, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2695354561590364657, guid: cf12bf4c185011642baa69b1b7022450, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5899879158270466040, guid: cf12bf4c185011642baa69b1b7022450, type: 3}
-      propertyPath: healthBar
+    - target: {fileID: 3398263825677613833, guid: cf12bf4c185011642baa69b1b7022450, type: 3}
+      propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 1978807243}
-    - target: {fileID: 5899879158270466040, guid: cf12bf4c185011642baa69b1b7022450, type: 3}
-      propertyPath: killCountObject
+      objectReference: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 6924896066091966973, guid: cf12bf4c185011642baa69b1b7022450, type: 3}
+      propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 364140617}
-    - target: {fileID: 5899879158270466040, guid: cf12bf4c185011642baa69b1b7022450, type: 3}
-      propertyPath: shotCoolDownSlider
-      value: 
-      objectReference: {fileID: 416485478}
-    - target: {fileID: 5899879158270466040, guid: cf12bf4c185011642baa69b1b7022450, type: 3}
-      propertyPath: nextSpellTextObject
-      value: 
-      objectReference: {fileID: 336005032}
-    - target: {fileID: 5899879158270466040, guid: cf12bf4c185011642baa69b1b7022450, type: 3}
-      propertyPath: prevSpellTextObject
-      value: 
-      objectReference: {fileID: 1020241241}
-    - target: {fileID: 5899879158270466040, guid: cf12bf4c185011642baa69b1b7022450, type: 3}
-      propertyPath: activeSpellTextObject
-      value: 
-      objectReference: {fileID: 1673649168}
+      objectReference: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 7836895274306562955, guid: cf12bf4c185011642baa69b1b7022450, type: 3}
       propertyPath: m_Name
       value: Player

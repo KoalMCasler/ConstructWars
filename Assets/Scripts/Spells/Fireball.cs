@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Fireball : Spell
 {
-   void Start()
+    public Rigidbody2D rb;
+    void Start()
     {
         spellName = "Fireball";
         player = GameObject.FindWithTag("Player");
@@ -28,6 +29,14 @@ public class Fireball : Spell
         Vector2 direction = Crosshair.transform.position - transform.position;
 
         transform.position = Vector2.MoveTowards(this.transform.position,Crosshair.transform.position,shotSpeed * Time.deltaTime);
+    }
+    void FixedUpdate()
+    {
+        //Makes shot face crosshair.
+        Vector2 aimDirection = player.GetComponent<PlayerController>().mousePosition - rb.position;
+
+        float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
+        rb.rotation = aimAngle;
     }
     void OnCollisionEnter2D(Collision2D other)
     {

@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     [Header("Attack/Aim Varables")]
     public GameObject[] spellArray = new GameObject[3];
     public int spellIndex;
-    Vector2 mousePosition;
+    public Vector2 mousePosition;
     public float ShotTimer;
     public float ShotDelay; //In seconds.
     public int fireForce;

@@ -27,5 +27,4 @@ public abstract class Spell : MonoBehaviour
     public GameObject ExplodePreFab;
     //Variables
     public float distance;
-    public Rigidbody2D rb;
 }

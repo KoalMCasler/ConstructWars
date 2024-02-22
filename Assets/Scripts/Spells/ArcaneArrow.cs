@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ArcaneArrow : Spell
 {
+    public Rigidbody2D rb;
     void Start()
     {
         spellName = "Arcane Arrow";
@@ -28,6 +29,14 @@ public class ArcaneArrow : Spell
         Vector2 direction = Crosshair.transform.position - transform.position;
 
         transform.position = Vector2.MoveTowards(this.transform.position,Crosshair.transform.position,shotSpeed * Time.deltaTime);
+    }
+    void FixedUpdate()
+    {
+        //Makes shot face crosshair.
+        Vector2 aimDirection = player.GetComponent<PlayerController>().mousePosition - rb.position;
+
+        float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
+        rb.rotation = aimAngle;
     }
     void OnCollisionEnter2D(Collision2D other)
     {
