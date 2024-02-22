@@ -1505,9 +1505,17 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4379029999809734125, guid: cf12bf4c185011642baa69b1b7022450, type: 3}
+      propertyPath: m_UpdateMode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4952762637973766559, guid: cf12bf4c185011642baa69b1b7022450, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 5700349369581606369, guid: cf12bf4c185011642baa69b1b7022450, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 7836895274306562955, guid: cf12bf4c185011642baa69b1b7022450, type: 3}
       propertyPath: m_Name
