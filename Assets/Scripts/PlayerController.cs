@@ -10,16 +10,15 @@ public class PlayerController : MonoBehaviour
     [Header("Object Referances")]
     public GameObject Player;
     public GameObject Crosshair;
-    public GameObject ProjectilePrefab;
     public Transform firePoint;
     public Rigidbody2D rb;
+    public GameObject[] spellArray = new GameObject[3];
     [Header("Movement variables")]
     public float moveSpeed = 5f;
     public float maxMoveSpeed = 10f;
     private float activeMoveSpeed;
     Vector2 moveDirection;
     [Header("Attack/Aim Varables")]
-    public GameObject[] spellArray = new GameObject[3];
     public int spellIndex;
     public Vector2 mousePosition;
     public float ShotTimer;
