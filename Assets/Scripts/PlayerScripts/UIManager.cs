@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -13,7 +15,10 @@ public class UIManager : MonoBehaviour
     public int killCount;
     private string killCountText;
     public int totalEnemies;
-    public Slider shotCoolDownSlider; 
+    public Slider shotCoolDownSlider;
+    public InputActionAsset inputAction;
+    public bool isPaused;
+    public int menuSceneBuildIndex;
     [Header("Active spell Components")]
     public GameObject activeSpell; // used for transform and name
     public GameObject nextSpell; // ^
@@ -21,8 +26,14 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI activeSpellTextObject;
     public TextMeshProUGUI nextSpellTextObject;
     public TextMeshProUGUI prevSpellTextObject;
+    [Header("Object References")]
+    public GameObject HUD;
+    public GameObject pauseMenu;
+    public GameObject optionsMenu;
+    public GameObject mainPauseMenu;
     void Start()
     {
+        isPaused = false;
         killCount = totalEnemies;
         player = GameObject.FindWithTag("Player");
         healthBar.maxValue = player.GetComponent<PlayerController>().ReturnMaxHP();
@@ -31,6 +42,7 @@ public class UIManager : MonoBehaviour
     }
     void Update()
     {
+        TogglePauseGame();
         UpdateActiveSpell();
         shotCoolDownSlider.maxValue = player.GetComponent<PlayerController>().ReturneShotDelay();
         healthBar.value = player.GetComponent<PlayerController>().ReturnCurrentHP();
@@ -60,5 +72,49 @@ public class UIManager : MonoBehaviour
         activeSpellTextObject.text = activeSpell.GetComponent<Spell>().spellName;
         nextSpellTextObject.text = nextSpell.GetComponent<Spell>().spellName;
         prevSpellTextObject.text = prevSpell.GetComponent<Spell>().spellName;
+    }
+    void OnPause()
+    {
+        if(isPaused)
+        {
+            isPaused = false;
+            optionsMenu.SetActive(false);
+            mainPauseMenu.SetActive(true);
+        }
+        else
+        {
+            isPaused = true;
+            mainPauseMenu.SetActive(true);
+            optionsMenu.SetActive(false);
+        }
+    }
+    void TogglePauseGame()
+    {
+        if(isPaused)
+        {
+            Time.timeScale = 0f;
+            HUD.SetActive(false);
+            pauseMenu.SetActive(true);
+        }
+        if(!isPaused)
+        {
+            Time.timeScale = 1f;
+            HUD.SetActive(true);
+            pauseMenu.SetActive(false);
+        }
+    }
+    public void ResumeGame()
+    {
+        isPaused = false;
+    }
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene(menuSceneBuildIndex);
+    }
+    public void QuitGame()
+    {
+        //Debug line to test quit function in editor
+        //UnityEditor.EditorApplication.isPlaying = false;
+        Application.Quit();
     }
 }

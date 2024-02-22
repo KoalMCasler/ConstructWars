@@ -79,19 +79,23 @@ public class PlayerController : MonoBehaviour
     }
     void OnFire()
     {
-        //Lets shot only take place if cooldown has happened
-        if(ShotTimer >= ShotDelay)
+        //Prevents player for fiering when pasued. 
+        if(!Player.GetComponent<UIManager>().isPaused)
         {
-            //Resets shot timer
-            ShotTimer = 0;
-            //Creates and fires projectile
-            GameObject Projectile = Instantiate(spellArray[spellIndex], firePoint.position, firePoint.rotation);
-            Projectile.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce);
-        }
-        else
-        {
-            //Debug to tell you that cooldown is not ready
-            Debug.Log("Wait for shot cooldown.");
+            //Lets shot only take place if cooldown has happened
+            if(ShotTimer >= ShotDelay)
+            {
+                //Resets shot timer
+                ShotTimer = 0;
+                //Creates and fires projectile
+                GameObject Projectile = Instantiate(spellArray[spellIndex], firePoint.position, firePoint.rotation);
+                Projectile.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce);
+            }
+            else
+            {
+                //Debug to tell you that cooldown is not ready
+                Debug.Log("Wait for shot cooldown.");
+            }
         }
     }
     void OnCollisionEnter2D(Collision2D other)
