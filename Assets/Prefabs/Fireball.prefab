@@ -161,13 +161,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce9d9ee08a6e0ad4998f7c8ae880b179, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spellName: Fireball
   damage: 300
   damageType: Fire
   shotLife: 6
   maxShotLife: 6
-  shotDelay: 5
+  shotDelay: 8
   shotSpeed: 10
   shotByPlayer: 0
   player: {fileID: 0}
   Crosshair: {fileID: 0}
   ExplodePreFab: {fileID: 8632480080141618762, guid: 9d2e8a95b078ed24da0471466d39cd45, type: 3}
+  distance: 0
+  rb: {fileID: 0}

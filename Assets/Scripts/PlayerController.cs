@@ -6,24 +6,26 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    //Object References
+    
+    [Header("Object Referances")]
     public GameObject Player;
     public GameObject Crosshair;
     public GameObject ProjectilePrefab;
     public Transform firePoint;
     public Rigidbody2D rb;
-    //Movement variables
+    [Header("Movement variables")]
     public float moveSpeed = 5f;
     public float maxMoveSpeed = 10f;
     private float activeMoveSpeed;
     Vector2 moveDirection;
-    //Attack/Aim Varables
-    public GameObject[] spellArray;
+    [Header("Attack/Aim Varables")]
+    public GameObject[] spellArray = new GameObject[3];
+    public int spellIndex;
     Vector2 mousePosition;
     public float ShotTimer;
     public float ShotDelay; //In seconds.
     public int fireForce;
-    //Stats variables
+    [Header("Stats variables")]
     public int currentHP;
     public int maxHP;
 
@@ -40,12 +42,13 @@ public class PlayerController : MonoBehaviour
         //Deactivate Cursor
         Cursor.visible = false;
         Crosshair.SetActive(true);
-        ShotDelay = spellArray[0].GetComponent<Spell>().shotDelay;
+        spellIndex = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
+        ShotDelay = spellArray[spellIndex].GetComponent<Spell>().shotDelay;
         //Checks to make sure player is not dead.
         CheckStatus();
         //Countdown for shot delay
@@ -83,7 +86,7 @@ public class PlayerController : MonoBehaviour
             //Resets shot timer
             ShotTimer = 0;
             //Creates and fires projectile
-            GameObject Projectile = Instantiate(ProjectilePrefab, firePoint.position, firePoint.rotation);
+            GameObject Projectile = Instantiate(spellArray[spellIndex], firePoint.position, firePoint.rotation);
             Projectile.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce);
         }
         else
@@ -132,5 +135,22 @@ public class PlayerController : MonoBehaviour
     public float ReturneShotTimer()
     {
         return ShotTimer;
+    }
+    void OnNextWeapon()
+    {
+        spellIndex += 1;
+        if(spellIndex > 2)
+        {
+            spellIndex = 0;
+        }
+    }
+    void OnPrevWeapon()
+    {
+        spellIndex -= 1;
+
+        if(spellIndex < 0)
+        {
+            spellIndex = 2;
+        }
     }
 }

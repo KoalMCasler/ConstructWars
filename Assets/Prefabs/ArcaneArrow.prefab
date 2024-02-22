@@ -161,6 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c2f72310505ddd42a102350cae313c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spellName: Arcane Arrow
   damage: 50
   damageType: Magic
   shotLife: 0
@@ -171,3 +172,5 @@ MonoBehaviour:
   player: {fileID: 0}
   Crosshair: {fileID: 0}
   ExplodePreFab: {fileID: 8632480080141618762, guid: 9d2e8a95b078ed24da0471466d39cd45, type: 3}
+  distance: 0
+  rb: {fileID: 0}

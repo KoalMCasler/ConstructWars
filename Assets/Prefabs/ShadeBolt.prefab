@@ -161,13 +161,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e11e3e16a2b1fd9459e05de2e701f189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spellName: Shade Bolt
   damage: 150
   damageType: Umbral
-  shotLife: 3
+  shotLife: 6
   maxShotLife: 0
-  shotDelay: 6
+  shotDelay: 2
   shotSpeed: 15
   shotByPlayer: 0
   player: {fileID: 0}
   Crosshair: {fileID: 7373996227890999695, guid: a76f2341d1276bf46a77d38990275f49, type: 3}
   ExplodePreFab: {fileID: 8632480080141618762, guid: 9d2e8a95b078ed24da0471466d39cd45, type: 3}
+  distance: 0
+  rb: {fileID: 0}
