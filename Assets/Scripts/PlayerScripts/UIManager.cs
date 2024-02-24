@@ -78,12 +78,14 @@ public class UIManager : MonoBehaviour
         if(isPaused)
         {
             isPaused = false;
+            Cursor.visible = false;
             optionsMenu.SetActive(false);
             mainPauseMenu.SetActive(true);
         }
         else
         {
             isPaused = true;
+            Cursor.visible = true;
             mainPauseMenu.SetActive(true);
             optionsMenu.SetActive(false);
         }
