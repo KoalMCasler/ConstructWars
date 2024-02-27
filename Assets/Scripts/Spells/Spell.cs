@@ -27,4 +27,6 @@ public abstract class Spell : MonoBehaviour
     public GameObject ExplodePreFab;
     //Variables
     public float distance;
+    public LayerMask playerLayer;
+    public LayerMask Default;
 }

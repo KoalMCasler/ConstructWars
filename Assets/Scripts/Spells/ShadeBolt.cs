@@ -24,32 +24,60 @@ public class ShadeBolt : Spell
     // Update is called once per frame
     void Update()
     {
-        //this makes the shot follow the mouse.
-        distance = Vector2.Distance(transform.position,Crosshair.transform.position);
-        Vector2 direction = Crosshair.transform.position - transform.position;
+        ShotByPlayerCheck();
+        if(shotByPlayer)
+        {
+            distance = Vector2.Distance(transform.position,Crosshair.transform.position);
+            Vector2 direction = Crosshair.transform.position - transform.position;
 
-        transform.position = Vector2.MoveTowards(this.transform.position,Crosshair.transform.position,shotSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(this.transform.position,Crosshair.transform.position,shotSpeed * Time.deltaTime);
+        }
+        //this makes the shot follow the mouse.
     }
     void FixedUpdate()
     {
-        //Makes shot face crosshair.
-        Vector2 aimDirection = player.GetComponent<PlayerController>().mousePosition - rb.position;
+        if(shotByPlayer)
+        {
+            Vector2 aimDirection = player.GetComponent<PlayerController>().mousePosition - rb.position;
 
-        float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
-        rb.rotation = aimAngle;
+            float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
+            rb.rotation = aimAngle;
+        }
+        //Makes shot face crosshair.
     }
     void OnCollisionEnter2D(Collision2D other)
     {
-        //ignores player
-        if(!other.gameObject.CompareTag("Player"))
+        if(shotByPlayer)
         {
-            //collides with enemy
-            if(other.gameObject.CompareTag("Enemy"))
+            //ignores player
+            if(!other.gameObject.CompareTag("Player"))
             {
-                other.gameObject.SetActive(false);
+                //collides with enemy
+                if(other.gameObject.CompareTag("Enemy"))
+                {
+                    other.gameObject.GetComponent<Enemy>().health -= damage;
+                }
+                //Destory self as long as not hitting the player
+                Destroy(gameObject);
             }
-            //Destory self as long as not hitting the player
-            Destroy(gameObject);
+            if(other.gameObject.CompareTag("Spell"))
+            {
+                Destroy(gameObject);
+                Destroy(other.gameObject);
+            }
+        }
+        if(!shotByPlayer)
+        {
+            if(other.gameObject.CompareTag("Player"))
+            {
+                other.gameObject.GetComponent<PlayerController>().currentHP -= damage;
+                Destroy(gameObject);
+            }
+            if(other.gameObject.CompareTag("Spell"))
+            {
+                Destroy(gameObject);
+                Destroy(other.gameObject);
+            }
         }
     }
     void OnDestroy()
@@ -58,5 +86,16 @@ public class ShadeBolt : Spell
         
         GameObject Explosion = Instantiate(ExplodePreFab, transform.position, Quaternion.identity);
         Destroy(Explosion, 1f);
+    }
+    void ShotByPlayerCheck()
+    {
+        if(shotByPlayer)
+        {
+            player.GetComponent<Collider2D>().excludeLayers = playerLayer;
+        }
+        else
+        {
+            player.GetComponent<Collider2D>().excludeLayers = Default;
+        }
     }
 }
