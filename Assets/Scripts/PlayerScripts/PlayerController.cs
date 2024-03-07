@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public Transform firePoint;
     public Rigidbody2D rb;
     public GameObject[] spellArray = new GameObject[3];
+    public UIManager uIManager;
     [Header("Movement variables")]
     public float moveSpeed = 5f;
     public float maxMoveSpeed = 10f;
@@ -80,7 +81,7 @@ public class PlayerController : MonoBehaviour
     void OnFire()
     {
         //Prevents player for fiering when pasued. 
-        if(!Player.GetComponent<UIManager>().isPaused)
+        if(!uIManager.isPaused)
         {
             //Lets shot only take place if cooldown has happened
             if(ShotTimer >= ShotDelay)

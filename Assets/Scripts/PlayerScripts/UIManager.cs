@@ -30,7 +30,8 @@ public class UIManager : MonoBehaviour
     public GameObject HUD;
     public GameObject pauseMenu;
     public GameObject optionsMenu;
-    public GameObject mainPauseMenu;
+    public GameObject mainMenu;
+    public GameManager gameManager;
     void Start()
     {
         isPaused = false;
@@ -78,16 +79,12 @@ public class UIManager : MonoBehaviour
         if(isPaused)
         {
             isPaused = false;
-            Cursor.visible = false;
-            optionsMenu.SetActive(false);
-            mainPauseMenu.SetActive(true);
+            gameManager.gameState = GameManager.GameState.Paused;
         }
         else
         {
             isPaused = true;
-            Cursor.visible = true;
-            mainPauseMenu.SetActive(true);
-            optionsMenu.SetActive(false);
+            gameManager.gameState = GameManager.GameState.Gameplay;
         }
     }
     void TogglePauseGame()
@@ -95,14 +92,10 @@ public class UIManager : MonoBehaviour
         if(isPaused)
         {
             Time.timeScale = 0f;
-            HUD.SetActive(false);
-            pauseMenu.SetActive(true);
         }
         if(!isPaused)
         {
             Time.timeScale = 1f;
-            HUD.SetActive(true);
-            pauseMenu.SetActive(false);
         }
     }
     public void ResumeGame()
@@ -118,5 +111,32 @@ public class UIManager : MonoBehaviour
         //Debug line to test quit function in editor
         //UnityEditor.EditorApplication.isPlaying = false;
         Application.Quit();
+    }
+    public void SetMainMenuActive()
+    {
+        ResetMenus();
+        mainMenu.SetActive(true);
+    }
+    public void SetHUDActive()
+    {
+        ResetMenus();
+        HUD.SetActive(true);
+    }
+    public void SetOptionsActive()
+    {
+        ResetMenus();
+        optionsMenu.SetActive(true);
+    }
+    public void SetPauseMenuActive()
+    {
+        ResetMenus();
+        pauseMenu.SetActive(true);
+    }
+    void ResetMenus()
+    {
+        mainMenu.SetActive(false);
+        optionsMenu.SetActive(false);
+        HUD.SetActive(false);
+        pauseMenu.SetActive(false);
     }
 }
