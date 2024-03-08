@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class Enemy : MonoBehaviour
     public Transform projectilePos;
     public GameObject player;
     public GameObject Self;
+    public GameObject targetHUD;
+    public Slider healthBar;
     [Header("Attack Varaibles")]
     public int attackRange;
     public int shotDelay;
@@ -16,20 +19,24 @@ public class Enemy : MonoBehaviour
     [Header("Stats")]
     public int damage;
     public int health;
+    public int maxHealth;
     public int moveSpeed;
     // Start is called before the first frame update
     void Start()
     {
+        health = maxHealth;
         if(shotTime <= 0)
         {
             shotTime = shotDelay;
         }
         player= GameObject.FindWithTag("Player");
+        healthBar.maxValue = maxHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
+        healthBar.value = health;
         CheckStatus();
         shotTime -= Time.deltaTime;
         if(shotTime <= 0)
@@ -53,5 +60,9 @@ public class Enemy : MonoBehaviour
         {
             this.gameObject.SetActive(false);
         }
+    }
+    void OnDisable()
+    {
+        targetHUD.SetActive(false);
     }
 }
