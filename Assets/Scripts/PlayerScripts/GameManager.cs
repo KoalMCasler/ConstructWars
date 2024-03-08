@@ -37,20 +37,28 @@ public class GameManager : MonoBehaviour
 
     void MainMenu()
     {
+        Cursor.visible = true;
+        player.GetComponent<PlayerController>().Crosshair.SetActive(false);
         uIManager.SetMainMenuActive();
         player.SetActive(false);
     }
     void Gameplay()
     {
+        Cursor.visible = false;
+        player.GetComponent<PlayerController>().Crosshair.SetActive(true);
         uIManager.SetHUDActive();
         player.SetActive(true);
     }
     void Paused()
     {
+        Cursor.visible = true;
+        player.GetComponent<PlayerController>().Crosshair.SetActive(false);
         uIManager.SetPauseMenuActive();
     }
     void Options()
     {
+        Cursor.visible = true;
+        player.GetComponent<PlayerController>().Crosshair.SetActive(false);
         uIManager.SetOptionsActive();
     }
     void MatchLoss()

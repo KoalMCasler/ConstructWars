@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 
 public class LevelManager : MonoBehaviour
 {
-     public GameManager gameManager;
+    public GameManager gameManager;
     public GameObject player;
     public GameObject mainCamera;
+    public Collider2D foundBoundingShape;
+    public CinemachineConfiner2D confiner2D;
     void Start()
     {
         player = GameObject.FindWithTag("Player");
@@ -27,6 +30,8 @@ public class LevelManager : MonoBehaviour
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        foundBoundingShape = GameObject.FindWithTag("Confiner").GetComponent<Collider2D>();
+        confiner2D.m_BoundingShape2D = foundBoundingShape;
         mainCamera = GameObject.FindWithTag("MainCamera");
         mainCamera.GetComponent<CameraFollow>().target = player.transform;
         player.transform.position = GameObject.FindWithTag("Spawn").transform.position;

@@ -39,10 +39,7 @@ public class PlayerController : MonoBehaviour
         currentHP = maxHP;
         //Current move speed
         activeMoveSpeed = moveSpeed;
-        //Deactivate Cursor
-        Cursor.visible = false;
-        Crosshair.SetActive(true);
-        spellIndex = 1;
+        spellIndex = 0;
     }
 
     // Update is called once per frame

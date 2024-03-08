@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Spell
   - Spawn
+  - Confiner
   layers:
   - Default
   - TransparentFX
