@@ -32,8 +32,6 @@ public class LevelManager : MonoBehaviour
     {
         foundBoundingShape = GameObject.FindWithTag("Confiner").GetComponent<Collider2D>();
         confiner2D.m_BoundingShape2D = foundBoundingShape;
-        mainCamera = GameObject.FindWithTag("MainCamera");
-        mainCamera.GetComponent<CameraFollow>().target = player.transform;
         player.transform.position = GameObject.FindWithTag("Spawn").transform.position;
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }

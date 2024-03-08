@@ -8,13 +8,12 @@ public class PlayerController : MonoBehaviour
 {
     
     [Header("Object Referances")]
-    public GameObject Player;
+    public UIManager uIManager;
+    public GameManager gameManager;
     public GameObject Crosshair;
     public Transform firePoint;
     public Rigidbody2D rb;
     public GameObject[] spellArray = new GameObject[3];
-    public UIManager uIManager;
-    public GameManager gameManager;
     [Header("Movement variables")]
     public float moveSpeed = 5f;
     public float maxMoveSpeed = 10f;

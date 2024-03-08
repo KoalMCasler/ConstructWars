@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI prevSpellTextObject;
     [Header("Object References")]
     public GameObject HUD;
+    public GameObject OnPlayerHUD;
     public GameObject pauseMenu;
     public GameObject optionsMenu;
     public GameObject mainMenu;
@@ -88,15 +89,16 @@ public class UIManager : MonoBehaviour
     }
     public void SetMainMenuActive()
     {
-        isPaused = false;
         ResetMenus();
+        isPaused = false;
         mainMenu.SetActive(true);
     }
     public void SetHUDActive()
     {
-        isPaused = false;
         ResetMenus();
+        isPaused = false;
         HUD.SetActive(true);
+        OnPlayerHUD.SetActive(true);
     }
     public void SetOptionsActive()
     {
@@ -105,8 +107,8 @@ public class UIManager : MonoBehaviour
     }
     public void SetPauseMenuActive()
     {
-        isPaused = true;
         ResetMenus();
+        isPaused = true;
         pauseMenu.SetActive(true);
     }
     void ResetMenus()
@@ -115,6 +117,7 @@ public class UIManager : MonoBehaviour
         optionsMenu.SetActive(false);
         HUD.SetActive(false);
         pauseMenu.SetActive(false);
+        OnPlayerHUD.SetActive(false);
     }
     public void BackFromOptions()
     {
