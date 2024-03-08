@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     public GameObject[] spellArray = new GameObject[3];
     public UIManager uIManager;
+    public GameManager gameManager;
     [Header("Movement variables")]
     public float moveSpeed = 5f;
     public float maxMoveSpeed = 10f;
@@ -50,10 +51,6 @@ public class PlayerController : MonoBehaviour
         CheckStatus();
         //Countdown for shot delay
         ShotTimer += Time.deltaTime;
-        if(ShotTimer > ShotDelay)
-        {
-            ShotTimer = ShotDelay;
-        }
         //Mouse input, Moves Crosshair to mouse position
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Crosshair.transform.position = mousePosition;
@@ -78,7 +75,7 @@ public class PlayerController : MonoBehaviour
     void OnFire()
     {
         //Prevents player for fiering when pasued. 
-        if(!uIManager.isPaused)
+        if(gameManager.gameState == GameManager.GameState.Gameplay)
         {
             //Lets shot only take place if cooldown has happened
             if(ShotTimer >= ShotDelay)
@@ -153,6 +150,19 @@ public class PlayerController : MonoBehaviour
         if(spellIndex < 0)
         {
             spellIndex = 2;
+        }
+    }
+    void OnPause()
+    {
+        if(gameManager.gameState == GameManager.GameState.Paused)
+        {
+            //isPaused = false;
+            gameManager.gameState = GameManager.GameState.Gameplay;
+        }
+        if(gameManager.gameState == GameManager.GameState.Gameplay)
+        {
+            //isPaused = true;
+            gameManager.gameState = GameManager.GameState.Paused;
         }
     }
 }

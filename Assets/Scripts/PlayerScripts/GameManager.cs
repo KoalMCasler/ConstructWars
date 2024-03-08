@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
     }
     void Gameplay()
     {
+        Time.timeScale = 1f;
         Cursor.visible = false;
         player.GetComponent<PlayerController>().Crosshair.SetActive(true);
         uIManager.SetHUDActive();
@@ -51,6 +52,7 @@ public class GameManager : MonoBehaviour
     }
     void Paused()
     {
+        Time.timeScale = 0f;
         Cursor.visible = true;
         player.GetComponent<PlayerController>().Crosshair.SetActive(false);
         uIManager.SetPauseMenuActive();
