@@ -9,6 +9,8 @@ TagManager:
   - Spell
   - Spawn
   - Confiner
+  - Surface
+  - Walls
   layers:
   - Default
   - TransparentFX
@@ -16,7 +18,7 @@ TagManager:
   - Player
   - Water
   - UI
-  - 
+  - Background
   - 
   - 
   - 
