@@ -13,10 +13,11 @@ public class PlayerController : MonoBehaviour
     public GameObject Crosshair;
     public Transform firePoint;
     public Rigidbody2D rb;
+    public Stats playerStats;
     public GameObject[] spellArray = new GameObject[3];
     [Header("Movement variables")]
-    public float moveSpeed = 5f;
-    public float maxMoveSpeed = 10f;
+    //public float moveSpeed = 5f;
+    //public float maxMoveSpeed = 10f;
     private float activeMoveSpeed;
     Vector2 moveDirection;
     [Header("Attack/Aim Varables")]
@@ -27,25 +28,21 @@ public class PlayerController : MonoBehaviour
     public int fireForce;
     [Header("Stats variables")]
     public int currentHP;
-    public int maxHP;
+    //public int maxHP;
 
-    void Start()
+    void Awake()
     {
-        if(maxHP <= 0)
-        {
-            maxHP = 400;
-        }
         // Starting HP
-        currentHP = maxHP;
+        currentHP = playerStats.maxHP;
         //Current move speed
-        activeMoveSpeed = moveSpeed;
+        activeMoveSpeed = playerStats.moveSpeed;
         spellIndex = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        ShotDelay = spellArray[spellIndex].GetComponent<Spell>().shotDelay;
+        ShotDelay = spellArray[spellIndex].GetComponent<SpellBase>().spell.shotDelay;
         //Checks to make sure player is not dead.
         CheckStatus();
         //Countdown for shot delay
@@ -83,7 +80,7 @@ public class PlayerController : MonoBehaviour
                 ShotTimer = 0;
                 //Creates and fires projectile
                 GameObject Projectile = Instantiate(spellArray[spellIndex], firePoint.position, firePoint.rotation);
-                Projectile.GetComponent<Spell>().shotByPlayer = true;
+                Projectile.GetComponent<SpellBase>().spell.shotByPlayer = true;
                 Projectile.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce);
             }
             else
@@ -120,7 +117,7 @@ public class PlayerController : MonoBehaviour
     }
     public float ReturnMaxHP()
     {
-        return maxHP;
+        return playerStats.maxHP;
     }
     void OnLook(InputValue lookValue)
     {
@@ -157,11 +154,13 @@ public class PlayerController : MonoBehaviour
         {
             //isPaused = false;
             gameManager.gameState = GameManager.GameState.Gameplay;
+            gameManager.ChangeGameState();
         }
         if(gameManager.gameState == GameManager.GameState.Gameplay)
         {
             //isPaused = true;
             gameManager.gameState = GameManager.GameState.Paused;
+            gameManager.ChangeGameState();
         }
     }
 }

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be42f8870e7ef1746b3f8896c95dcc43, type: 3}
+  m_Name: FireBolt
+  m_EditorClassIdentifier: 
+  spellName: Fire Bolt
+  damage: 200
+  damageType: Fire
+  shotLife: 6
+  maxShotLife: 6
+  shotDelay: 8
+  shotSpeed: 10
+  shotByPlayer: 1
+  player: {fileID: 0}
+  Crosshair: {fileID: 0}
+  ExplodePreFab: {fileID: 8632480080141618762, guid: 9d2e8a95b078ed24da0471466d39cd45, type: 3}
+  distance: 11.806039
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  Default:
+    serializedVersion: 2
+    m_Bits: 0

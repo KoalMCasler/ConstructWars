@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 7313753322216576655}
   - component: {fileID: 7276251521031312472}
   - component: {fileID: 2256083309066265496}
-  - component: {fileID: 5465575439168112528}
+  - component: {fileID: 3718671262893043990}
   m_Layer: 0
   m_Name: ShadeBolt(P)
   m_TagString: Spell
@@ -234,7 +234,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &5465575439168112528
+--- !u!114 &3718671262893043990
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -243,25 +243,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 7070982434306895802}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e11e3e16a2b1fd9459e05de2e701f189, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c2f72310505ddd42a102350cae313c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellName: Shade Bolt
-  damage: 150
-  damageType: Umbral
-  shotLife: 6
-  maxShotLife: 0
-  shotDelay: 2
-  shotSpeed: 15
-  shotByPlayer: 0
-  player: {fileID: 0}
-  Crosshair: {fileID: 7373996227890999695, guid: a76f2341d1276bf46a77d38990275f49, type: 3}
-  ExplodePreFab: {fileID: 8632480080141618762, guid: 9d2e8a95b078ed24da0471466d39cd45, type: 3}
-  distance: 0
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  Default:
-    serializedVersion: 2
-    m_Bits: 0
+  spell: {fileID: 11400000, guid: a3dea89657c2f504db0045cc213dc2ad, type: 2}
   rb: {fileID: 7276251521031312472}

@@ -52,7 +52,7 @@ public class Enemy : MonoBehaviour
     void Shoot()
     {
         GameObject projectile = Instantiate(spell, projectilePos.position, Quaternion.identity);
-        projectile.GetComponent<Spell>().shotByPlayer = false;
+        projectile.GetComponent<SpellBase>().spell.shotByPlayer = false;
     }
     void CheckStatus()
     {

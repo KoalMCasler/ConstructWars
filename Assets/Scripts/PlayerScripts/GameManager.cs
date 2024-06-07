@@ -20,9 +20,10 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         gameState = GameState.MainMenu;
+        MainMenu();
     }
 
-    void Update()
+    public void ChangeGameState()
     {
         switch(gameState)
         {
@@ -37,9 +38,9 @@ public class GameManager : MonoBehaviour
 
     void MainMenu()
     {
+        uIManager.SetMainMenuActive();
         Cursor.visible = true;
         player.GetComponent<PlayerController>().Crosshair.SetActive(false);
-        uIManager.SetMainMenuActive();
         player.SetActive(false);
     }
     void Gameplay()

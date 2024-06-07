@@ -4,21 +4,22 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    [Header("Managers")]
+    public GameManager gameManager;
+    public LevelManager levelManager;
     [Header("Player Info")]
+    public GameObject player;
     public bool isPaused;
     public Slider healthBar;
-    public GameObject player;
     public TextMeshProUGUI killCountObject;
     public int killCount;
     private string killCountText;
     public int totalEnemies;
     public Slider shotCoolDownSlider;
     public InputActionAsset inputAction;
-    public int menuSceneBuildIndex;
     [Header("Active spell Components")]
     public GameObject activeSpell; // used for transform and name
     public GameObject nextSpell; // ^
@@ -32,11 +33,13 @@ public class UIManager : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject optionsMenu;
     public GameObject mainMenu;
-    public GameManager gameManager;
+    public GameObject shop;
+    public GameObject workshop;
+    
     void Start()
     {
-        killCount = totalEnemies;
         player = GameObject.FindWithTag("Player");
+        killCount = totalEnemies;
         healthBar.maxValue = player.GetComponent<PlayerController>().ReturnMaxHP();
         healthBar.value = player.GetComponent<PlayerController>().ReturnCurrentHP();
         shotCoolDownSlider.maxValue = player.GetComponent<PlayerController>().ReturneShotDelay();
@@ -69,17 +72,18 @@ public class UIManager : MonoBehaviour
         activeSpell = player.GetComponent<PlayerController>().spellArray[player.GetComponent<PlayerController>().spellIndex];
         nextSpell = player.GetComponent<PlayerController>().spellArray[nextSpellIndex];
         prevSpell = player.GetComponent<PlayerController>().spellArray[prevSpellIndex];
-        activeSpellTextObject.text = activeSpell.GetComponent<Spell>().spellName;
-        nextSpellTextObject.text = nextSpell.GetComponent<Spell>().spellName;
-        prevSpellTextObject.text = prevSpell.GetComponent<Spell>().spellName;
+        activeSpellTextObject.text = activeSpell.GetComponent<SpellBase>().spell.spellName;
+        nextSpellTextObject.text = nextSpell.GetComponent<SpellBase>().spell.spellName;
+        prevSpellTextObject.text = prevSpell.GetComponent<SpellBase>().spell.spellName;
     }
     public void ResumeGame()
     {
         gameManager.gameState = GameManager.GameState.Gameplay;
+        gameManager.ChangeGameState();
     }
     public void BackToMenu()
     {
-        SceneManager.LoadScene(menuSceneBuildIndex);
+        
     }
     public void QuitGame()
     {
@@ -118,21 +122,32 @@ public class UIManager : MonoBehaviour
         HUD.SetActive(false);
         pauseMenu.SetActive(false);
         OnPlayerHUD.SetActive(false);
+        workshop.SetActive(false);
     }
     public void BackFromOptions()
     {
         if(isPaused)
         {
             gameManager.gameState = GameManager.GameState.Paused;
+            gameManager.ChangeGameState();
+
         }
         if(!isPaused)
         {
             gameManager.gameState = GameManager.GameState.MainMenu;
+            gameManager.ChangeGameState();
         }
     }
     public void OpenOptionsMenu()
     {
         gameManager.gameState = GameManager.GameState.Options;
+        gameManager.ChangeGameState();
+    }
+
+    public void SetWorkshopActive()
+    {
+        ResetMenus();
+        workshop.SetActive(true);
     }
 
 }

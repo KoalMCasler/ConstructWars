@@ -21,10 +21,12 @@ public class LevelManager : MonoBehaviour
         if(sceneName.StartsWith("Arena"))
         {
             gameManager.gameState = GameManager.GameState.Gameplay;
+            gameManager.ChangeGameState();
         }
-        if(sceneName == "MainMenu")
+        else if(sceneName == "MainMenu")
         {
             gameManager.gameState = GameManager.GameState.MainMenu;
+            gameManager.ChangeGameState();
         }
         SceneManager.LoadScene(sceneName);
     }

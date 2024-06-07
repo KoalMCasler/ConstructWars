@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Spell : MonoBehaviour
+[CreateAssetMenu(fileName = "SpellComp", menuName = "SpellComponent", order = 0)]
+public class SpellComponent : ScriptableObject
 {
     [Header("SpellComponents")]
     [SerializeField]
