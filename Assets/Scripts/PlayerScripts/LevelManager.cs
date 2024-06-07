@@ -22,6 +22,7 @@ public class LevelManager : MonoBehaviour
         {
             gameManager.gameState = GameManager.GameState.Gameplay;
             gameManager.ChangeGameState();
+            player.GetComponent<PlayerController>().CalculateStats();
         }
         else if(sceneName == "MainMenu")
         {

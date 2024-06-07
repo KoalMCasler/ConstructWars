@@ -20,6 +20,13 @@ public class UIManager : MonoBehaviour
     public int totalEnemies;
     public Slider shotCoolDownSlider;
     public InputActionAsset inputAction;
+    [Header("Player workshop stats")]
+    public TextMeshProUGUI workshopHP;
+    public TextMeshProUGUI workshopDR;
+    public TextMeshProUGUI workshopDM;
+    public TextMeshProUGUI workshopMS;
+    public TextMeshProUGUI workshopSC;
+    public TextMeshProUGUI workshopLuck;
     [Header("Active spell Components")]
     public GameObject activeSpell; // used for transform and name
     public GameObject nextSpell; // ^
@@ -46,12 +53,14 @@ public class UIManager : MonoBehaviour
     }
     void Update()
     {
-        UpdateActiveSpell();
-        shotCoolDownSlider.maxValue = player.GetComponent<PlayerController>().ReturneShotDelay();
-        healthBar.value = player.GetComponent<PlayerController>().ReturnCurrentHP();
-        killCountText = string.Format("Remaining Enemies\n\n{0}/{1} ",killCount,totalEnemies);
-        killCountObject.text = killCountText;
-        shotCoolDownSlider.value = player.GetComponent<PlayerController>().ReturneShotTimer();
+        if(HUD.activeSelf)
+        {
+            UpdateHUD();
+        }
+        if(workshop.activeSelf)
+        {
+            UpdateWorkshop();
+        }
     }
     public void UpdateKillCount()
     {
@@ -148,6 +157,26 @@ public class UIManager : MonoBehaviour
     {
         ResetMenus();
         workshop.SetActive(true);
+    }
+
+    void UpdateHUD()
+    {
+        UpdateActiveSpell();
+        shotCoolDownSlider.maxValue = player.GetComponent<PlayerController>().ReturneShotDelay();
+        healthBar.value = player.GetComponent<PlayerController>().ReturnCurrentHP();
+        killCountText = string.Format("Remaining Enemies\n\n{0}/{1} ",killCount,totalEnemies);
+        killCountObject.text = killCountText;
+        shotCoolDownSlider.value = player.GetComponent<PlayerController>().ReturneShotTimer();
+    }
+
+    void UpdateWorkshop()
+    {
+        workshopHP.text = string.Format("HP: {0}", player.GetComponent<PlayerController>().playerStats.maxHP);
+        workshopDR.text = string.Format("DR: {0}", player.GetComponent<PlayerController>().playerStats.DamageResitance);
+        workshopDM.text = string.Format("DM: {0}", player.GetComponent<PlayerController>().playerStats.DamageModifier);
+        workshopMS.text = string.Format("MS: {0}", player.GetComponent<PlayerController>().playerStats.moveSpeed);
+        workshopSC.text = string.Format("SC: {0}", player.GetComponent<PlayerController>().playerStats.SpellChargeRate);
+        workshopLuck.text = string.Format("Luck: {0}%", player.GetComponent<PlayerController>().playerStats.Luck);
     }
 
 }

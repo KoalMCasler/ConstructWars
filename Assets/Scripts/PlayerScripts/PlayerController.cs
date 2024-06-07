@@ -14,6 +14,10 @@ public class PlayerController : MonoBehaviour
     public Transform firePoint;
     public Rigidbody2D rb;
     public Stats playerStats;
+    [Header("Player Build")]
+    public GameObject core;
+    public GameObject Utility;
+    public GameObject Mobility;
     public GameObject[] spellArray = new GameObject[3];
     [Header("Movement variables")]
     //public float moveSpeed = 5f;
@@ -162,5 +166,10 @@ public class PlayerController : MonoBehaviour
             gameManager.gameState = GameManager.GameState.Paused;
             gameManager.ChangeGameState();
         }
+    }
+
+    public void CalculateStats()
+    {
+        
     }
 }
