@@ -70,7 +70,7 @@ public class SpellBase : MonoBehaviour
                 //collides with enemy
                 if(other.gameObject.CompareTag("Enemy"))
                 {
-                    other.gameObject.GetComponent<Enemy>().health -= spell.damage;
+                    other.gameObject.GetComponent<Enemy>().health -= ((float)spell.damage)* spell.player.GetComponent<PlayerController>().playerStats.DamageModifier;
                 }
                 //Destory self as long as not hitting the player
                 Destroy(gameObject);
@@ -85,7 +85,7 @@ public class SpellBase : MonoBehaviour
         {
             if(other.gameObject.CompareTag("Player"))
             {
-                other.gameObject.GetComponent<PlayerController>().currentHP -= spell.damage;
+                other.gameObject.GetComponent<PlayerController>().currentHP -= ((float)spell.damage) - spell.player.GetComponent<PlayerController>().playerStats.DamageResitance;
                 Destroy(gameObject);
             }
             if(other.gameObject.CompareTag("Spell"))

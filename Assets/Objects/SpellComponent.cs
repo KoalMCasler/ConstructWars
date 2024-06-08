@@ -9,7 +9,7 @@ public class SpellComponent : ScriptableObject
     [SerializeField]
     public string spellName;
     [SerializeField]
-    public int damage;
+    public float damage;
     [SerializeField]
     public string damageType;
     [SerializeField]

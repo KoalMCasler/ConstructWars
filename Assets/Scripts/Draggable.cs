@@ -9,10 +9,13 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     public GameObject uICanvas;
     public Transform parentAfterDrag;
     public Image image;
+    public GameObject player;
+    public bool isEquipped;
     void Start()
     {
         image = this.GetComponent<Image>();
         uICanvas = GameObject.FindWithTag("UI");
+        player = GameObject.FindWithTag("Player");
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -21,6 +24,21 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         transform.SetParent(uICanvas.transform);
         transform.SetAsLastSibling();
         image.raycastTarget = false;
+        if(this.GetComponent<InventoryItem>().itemType == "Core" && isEquipped == true)
+        {
+            player.GetComponent<PlayerController>().core = null;
+            isEquipped = false;
+        }
+        if(this.GetComponent<InventoryItem>().itemType == "Utility" && isEquipped == true)
+        {
+            player.GetComponent<PlayerController>().utility = null;
+            isEquipped = false;
+        }
+        if(this.GetComponent<InventoryItem>().itemType == "Mobility" && isEquipped == true)
+        {
+            player.GetComponent<PlayerController>().mobility = null;
+            isEquipped = false;
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -32,5 +50,6 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     {
         transform.SetParent(parentAfterDrag);
         image.raycastTarget = true;
+        player.GetComponent<PlayerController>().CalculateStats();
     }
 }

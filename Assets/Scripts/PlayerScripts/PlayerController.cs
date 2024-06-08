@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     public float ShotDelay; //In seconds.
     public int fireForce;
     [Header("Stats variables")]
-    public int currentHP;
+    public float currentHP;
     //public int maxHP;
 
     void Awake()
@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
         //Current move speed
         activeMoveSpeed = playerStats.moveSpeed;
         spellIndex = 0;
+        CalculateStats();
     }
 
     // Update is called once per frame
@@ -170,6 +171,35 @@ public class PlayerController : MonoBehaviour
 
     public void CalculateStats()
     {
-        
+        if(core != null)
+        {
+            playerStats.maxHP = playerStats.maxHPBase + core.GetComponent<InventoryItem>().HPMod;
+            playerStats.DamageResitance = playerStats.DamageResitanceBase + core.GetComponent<InventoryItem>().DRMod;
+        }
+        else
+        {
+            playerStats.maxHP = playerStats.maxHPBase;
+            playerStats.DamageResitance = playerStats.DamageResitanceBase;
+        }
+        if(utility != null)
+        {
+            playerStats.DamageModifier = playerStats.DamageModifierBase + utility.GetComponent<InventoryItem>().DMMod;
+            playerStats.SpellChargeRate = playerStats.SpellChargeRateBase + utility.GetComponent<InventoryItem>().CoolDownReduction;
+            playerStats.Luck = playerStats.LuckBase + utility.GetComponent<InventoryItem>().LuckMod;
+        }
+        else
+        {
+            playerStats.DamageModifier = playerStats.DamageModifierBase;
+            playerStats.SpellChargeRate = playerStats.SpellChargeRateBase;
+            playerStats.Luck = playerStats.LuckBase;
+        }
+        if(mobility != null)
+        {
+            playerStats.moveSpeed = playerStats.moveSpeedBase + mobility.GetComponent<InventoryItem>().MSMod;
+        }
+        else
+        {
+            playerStats.moveSpeed = playerStats.moveSpeedBase;
+        }
     }
 }

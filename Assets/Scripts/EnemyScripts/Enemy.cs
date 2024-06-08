@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
     public float shotTime;
     [Header("Stats")]
     public int damage;
-    public int health;
+    public float health;
     public int maxHealth;
     public int moveSpeed;
     // Start is called before the first frame update

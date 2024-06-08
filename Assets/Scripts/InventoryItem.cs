@@ -11,8 +11,8 @@ public class InventoryItem : MonoBehaviour
     public float CoolDownReduction;
     public float DMMod;
     [Header("If item is Core")]
-    public float HPMod;
-    public float DRMod;
+    public int HPMod;
+    public int DRMod;
     [Header("If item is Mobility")]
     public float MSMod;
     [Header("If Item is a spell")]

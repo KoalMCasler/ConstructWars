@@ -13,15 +13,12 @@ public class ConstructSlot : MonoBehaviour, IDropHandler
     [Header("Only for spell slots")]
     public int SpellSlotNumber; // 0-2
 
-    void Start()
-    {
-        player = FindObjectOfType<PlayerController>();
-    }
     public void OnDrop(PointerEventData eventData)
     {
         if(transform.childCount == 0)
         {
             dropped = eventData.pointerDrag;
+            dropped.GetComponent<Draggable>().isEquipped = true;
             if(dropped.gameObject.GetComponent<InventoryItem>().itemType == slotType)
             {   
                 if(dropped.GetComponent<InventoryItem>().itemType == "Spell")
@@ -31,14 +28,17 @@ public class ConstructSlot : MonoBehaviour, IDropHandler
                 else if(dropped.GetComponent<InventoryItem>().itemType == "Core")
                 {
                     player.core = dropped;
+                    player.CalculateStats();
                 }
                 else if(dropped.GetComponent<InventoryItem>().itemType == "Utility")
                 {
                     player.utility = dropped;
+                    player.CalculateStats();
                 }
                 else if(dropped.GetComponent<InventoryItem>().itemType == "Mobility")
                 {
                     player.mobility = dropped;
+                    player.CalculateStats();
                 }
                 dropped.GetComponent<Draggable>().parentAfterDrag = transform;
             }
