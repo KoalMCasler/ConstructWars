@@ -16,8 +16,8 @@ public class PlayerController : MonoBehaviour
     public Stats playerStats;
     [Header("Player Build")]
     public GameObject core;
-    public GameObject Utility;
-    public GameObject Mobility;
+    public GameObject utility;
+    public GameObject mobility;
     public GameObject[] spellArray = new GameObject[3];
     [Header("Movement variables")]
     //public float moveSpeed = 5f;

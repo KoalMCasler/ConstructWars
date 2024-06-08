@@ -28,6 +28,18 @@ public class ConstructSlot : MonoBehaviour, IDropHandler
                 {
                     player.spellArray[SpellSlotNumber] = dropped.GetComponent<InventoryItem>().Spell;
                 }
+                else if(dropped.GetComponent<InventoryItem>().itemType == "Core")
+                {
+                    player.core = dropped;
+                }
+                else if(dropped.GetComponent<InventoryItem>().itemType == "Utility")
+                {
+                    player.utility = dropped;
+                }
+                else if(dropped.GetComponent<InventoryItem>().itemType == "Mobility")
+                {
+                    player.mobility = dropped;
+                }
                 dropped.GetComponent<Draggable>().parentAfterDrag = transform;
             }
             else
