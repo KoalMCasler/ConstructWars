@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be42f8870e7ef1746b3f8896c95dcc43, type: 3}
   m_Name: FireBolt
   m_EditorClassIdentifier: 
-  spellName: Fire Bolt
+  spellName: Fire Ball
   damage: 200
   damageType: Fire
   shotLife: 6
@@ -22,8 +22,8 @@ MonoBehaviour:
   shotByPlayer: 1
   player: {fileID: 0}
   Crosshair: {fileID: 0}
-  ExplodePreFab: {fileID: 8632480080141618762, guid: 9d2e8a95b078ed24da0471466d39cd45, type: 3}
-  distance: 11.806039
+  ExplodePreFab: {fileID: 642409156862868911, guid: 5231cd0998ad59842a1d27a324014ee4, type: 3}
+  distance: 4.8761983
   playerLayer:
     serializedVersion: 2
     m_Bits: 8

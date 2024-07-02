@@ -22,8 +22,8 @@ MonoBehaviour:
   shotByPlayer: 1
   player: {fileID: 0}
   Crosshair: {fileID: 0}
-  ExplodePreFab: {fileID: 8632480080141618762, guid: 9d2e8a95b078ed24da0471466d39cd45, type: 3}
-  distance: 5.687385
+  ExplodePreFab: {fileID: 4918045224436450626, guid: f193476e06d574e4c9a68b52c35f71dd, type: 3}
+  distance: 3.3957214
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
