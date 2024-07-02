@@ -27,6 +27,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI workshopMS;
     public TextMeshProUGUI workshopSC;
     public TextMeshProUGUI workshopLuck;
+    public Button EnterArenaButton;
     [Header("Active spell Components")]
     public GameObject activeSpell; // used for transform and name
     public GameObject nextSpell; // ^
@@ -60,6 +61,14 @@ public class UIManager : MonoBehaviour
         if(workshop.activeSelf)
         {
             UpdateWorkshop();
+        }
+        if(player.GetComponent<PlayerController>().origin == null)
+        {
+            EnterArenaButton.interactable = false;
+        }
+        else
+        {
+            EnterArenaButton.interactable = true;
         }
     }
     public void UpdateKillCount()

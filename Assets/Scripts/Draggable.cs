@@ -24,9 +24,14 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         transform.SetParent(uICanvas.transform);
         transform.SetAsLastSibling();
         image.raycastTarget = false;
-        if(this.GetComponent<InventoryItem>().itemType == "Core" && isEquipped == true)
+        if(this.GetComponent<InventoryItem>().itemType == "Origin" && isEquipped == true)
         {
-            player.GetComponent<PlayerController>().core = null;
+            player.GetComponent<PlayerController>().origin = null;
+            isEquipped = false;
+        }
+        if(this.GetComponent<InventoryItem>().itemType == "Heart" && isEquipped == true)
+        {
+            player.GetComponent<PlayerController>().heart = null;
             isEquipped = false;
         }
         if(this.GetComponent<InventoryItem>().itemType == "Utility" && isEquipped == true)

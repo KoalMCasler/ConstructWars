@@ -6,11 +6,14 @@ public class InventoryItem : MonoBehaviour
 {
     [Header("Item Type")]
     public string itemType;
+    public string itemName;
+    [Header("If item is an Origin")]
+    public GameObject origin;
     [Header("If item is Utility")]
     public int LuckMod;
     public float CoolDownReduction;
     public float DMMod;
-    [Header("If item is Core")]
+    [Header("If item is Heart")]
     public int HPMod;
     public int DRMod;
     [Header("If item is Mobility")]

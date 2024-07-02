@@ -15,7 +15,9 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     public Stats playerStats;
     [Header("Player Build")]
-    public GameObject core;
+    public GameObject Body;
+    public GameObject origin;
+    public GameObject heart;
     public GameObject utility;
     public GameObject mobility;
     public GameObject[] spellArray = new GameObject[3];
@@ -171,10 +173,20 @@ public class PlayerController : MonoBehaviour
 
     public void CalculateStats()
     {
-        if(core != null)
+        if(origin != null)
         {
-            playerStats.maxHP = playerStats.maxHPBase + core.GetComponent<InventoryItem>().HPMod;
-            playerStats.DamageResitance = playerStats.DamageResitanceBase + core.GetComponent<InventoryItem>().DRMod;
+            playerStats.maxHPBase = origin.GetComponent<InventoryItem>().HPMod;
+            playerStats.DamageResitanceBase = origin.GetComponent<InventoryItem>().DRMod;
+            playerStats.DamageModifierBase = origin.GetComponent<InventoryItem>().DMMod;
+            playerStats.SpellChargeRateBase = origin.GetComponent<InventoryItem>().CoolDownReduction;
+            playerStats.LuckBase = origin.GetComponent<InventoryItem>().LuckMod;
+            playerStats.moveSpeedBase = origin.GetComponent<InventoryItem>().MSMod;
+            Body.GetComponent<SpriteRenderer>().sprite = origin.GetComponent<InventoryItem>().origin.GetComponent<SpriteRenderer>().sprite;
+        }
+        if(heart != null)
+        {
+            playerStats.maxHP = playerStats.maxHPBase + heart.GetComponent<InventoryItem>().HPMod;
+            playerStats.DamageResitance = playerStats.DamageResitanceBase + heart.GetComponent<InventoryItem>().DRMod;
         }
         else
         {

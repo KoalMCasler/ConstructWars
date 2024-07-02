@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e8e0df51ec5a5458fe5cd7cd5422bb, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  maxHP: 500
-  maxHPBase: 400
-  DamageResitance: 10
-  DamageResitanceBase: 5
-  DamageModifier: 2.3
-  DamageModifierBase: 1.15
-  SpellChargeRate: 1.18
-  SpellChargeRateBase: 1.03
-  Luck: 9
-  LuckBase: 4
-  moveSpeed: 8
-  moveSpeedBase: 5
+  maxHP: 0
+  maxHPBase: 0
+  DamageResitance: 0
+  DamageResitanceBase: 0
+  DamageModifier: 0
+  DamageModifierBase: 0
+  SpellChargeRate: 0
+  SpellChargeRateBase: 0
+  Luck: 0
+  LuckBase: 0
+  moveSpeed: 0
+  moveSpeedBase: 0
   maxMoveSpeed: 10
