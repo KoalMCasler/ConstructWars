@@ -15,15 +15,15 @@ MonoBehaviour:
   spellName: Fire Ball
   damage: 200
   damageType: Fire
-  shotLife: 6
-  maxShotLife: 6
-  shotDelay: 8
+  shotLife: 10
+  maxShotLife: 10
+  shotDelay: 6
   shotSpeed: 10
   shotByPlayer: 1
   player: {fileID: 0}
   Crosshair: {fileID: 0}
   ExplodePreFab: {fileID: 642409156862868911, guid: 5231cd0998ad59842a1d27a324014ee4, type: 3}
-  distance: 4.8761983
+  distance: 0
   playerLayer:
     serializedVersion: 2
     m_Bits: 8

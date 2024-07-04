@@ -214,4 +214,20 @@ public class PlayerController : MonoBehaviour
             playerStats.moveSpeed = playerStats.moveSpeedBase;
         }
     }
+
+    void ResetStats() //Used for a clean start
+    {
+        playerStats.maxHPBase = 0;
+        playerStats.maxHP = 0;
+        playerStats.DamageResitance = 0;
+        playerStats.DamageResitanceBase = 0;
+        playerStats.DamageModifier = 0;
+        playerStats.DamageModifierBase = 0;
+        playerStats.SpellChargeRate = 0;
+        playerStats.SpellChargeRateBase = 0;
+        playerStats.Luck = 0;
+        playerStats.LuckBase = 0;
+        playerStats.moveSpeed = 0;
+        playerStats.moveSpeedBase = 0;
+    }
 }

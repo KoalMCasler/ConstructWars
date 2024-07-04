@@ -16,8 +16,8 @@ MonoBehaviour:
   damage: 150
   damageType: Arcane
   shotLife: 6
-  maxShotLife: 6
-  shotDelay: 5
+  maxShotLife: 8
+  shotDelay: 4
   shotSpeed: 12.5
   shotByPlayer: 1
   player: {fileID: 0}

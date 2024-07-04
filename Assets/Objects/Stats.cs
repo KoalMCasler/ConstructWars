@@ -19,5 +19,5 @@ public class Stats : ScriptableObject
     [Header("Movement Stats")]
     public float moveSpeed = 5f; //MS in game
     public float moveSpeedBase = 5f; 
-    public float maxMoveSpeed = 10f;
+    public float maxMoveSpeed = 20f;
 }

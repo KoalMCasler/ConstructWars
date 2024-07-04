@@ -6,6 +6,7 @@ using TMPro;
 public class ToolTipManager : MonoBehaviour
 {
     public TextMeshProUGUI itemName;
+    public TextMeshProUGUI itemType;
     public TextMeshProUGUI hpText;
     public TextMeshProUGUI dMText;
     public TextMeshProUGUI dRText;
@@ -14,9 +15,8 @@ public class ToolTipManager : MonoBehaviour
     public TextMeshProUGUI luckText;
     public void SetAndShowToolTip(InventoryItem item)
     {
-        transform.position = Input.mousePosition;
-        this.gameObject.SetActive(true);
         itemName.text = item.itemName;
+        itemType.text = item.itemType;
         if(item.itemType == "Origin")
         {
             hpText.text = string.Format("Base HP: {0}",item.HPMod);
@@ -32,7 +32,7 @@ public class ToolTipManager : MonoBehaviour
             dRText.text = string.Format("Shot life = {0}/s",item.Spell.GetComponent<SpellBase>().spell.maxShotLife);
             mSText.text = string.Format("Shot Delay = {0}/s",item.Spell.GetComponent<SpellBase>().spell.shotDelay);
             dMText.text = string.Format("Shot Speed = {0}m/s",item.Spell.GetComponent<SpellBase>().spell.shotSpeed);
-            cDRText.text = string.Empty;
+            cDRText.text = "~";
             luckText.text = string.Format("Damage Type = {0}",item.Spell.GetComponent<SpellBase>().spell.damageType);
         }
         else if(item.itemType == "Heart")
@@ -65,13 +65,13 @@ public class ToolTipManager : MonoBehaviour
     }
     public void HideToolTip()
     {
-        this.gameObject.SetActive(false);
-        itemName.text = string.Empty;
-        hpText.text = string.Empty;
-        dMText.text = string.Empty;
-        dRText.text = string.Empty;
-        cDRText.text = string.Empty;
-        mSText.text = string.Empty;
-        luckText.text = string.Empty; 
+        itemName.text = "Item Name";
+        itemType.text = "Item Type";
+        hpText.text = "~";
+        dMText.text = "~";
+        dRText.text = "~";
+        cDRText.text = "~";
+        mSText.text = "~";
+        luckText.text = "~"; 
     }
 }

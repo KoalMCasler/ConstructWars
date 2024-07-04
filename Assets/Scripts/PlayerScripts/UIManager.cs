@@ -184,7 +184,7 @@ public class UIManager : MonoBehaviour
         workshopDR.text = string.Format("DR: {0}", player.GetComponent<PlayerController>().playerStats.DamageResitance);
         workshopDM.text = string.Format("DM: {0}", player.GetComponent<PlayerController>().playerStats.DamageModifier);
         workshopMS.text = string.Format("MS: {0}", player.GetComponent<PlayerController>().playerStats.moveSpeed);
-        workshopSC.text = string.Format("SC: {0}", player.GetComponent<PlayerController>().playerStats.SpellChargeRate);
+        workshopSC.text = string.Format("CDR: {0}", player.GetComponent<PlayerController>().playerStats.SpellChargeRate);
         workshopLuck.text = string.Format("Luck: {0}%", player.GetComponent<PlayerController>().playerStats.Luck);
     }
 

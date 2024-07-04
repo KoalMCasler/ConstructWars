@@ -6,6 +6,12 @@ public class SpellBase : MonoBehaviour
 {
     public SpellComponent spell;
     public Rigidbody2D rb;
+    public GameObject umbralSelfCollision;
+    public GameObject arcaneSelfCollision;
+    public GameObject FireSelfCollision;
+    public GameObject FireArcaneCollision;
+    public GameObject FireUmbralCollision;
+    public GameObject ArcaneUmbralCollision;
     void Start()
     {
         spell.player = GameObject.FindWithTag("Player");
@@ -77,8 +83,7 @@ public class SpellBase : MonoBehaviour
             }
             if(other.gameObject.CompareTag("Spell"))
             {
-                Destroy(gameObject);
-                Destroy(other.gameObject);
+                SpellCollision(other.gameObject);
             }
         }
         if(!spell.shotByPlayer)
@@ -90,16 +95,18 @@ public class SpellBase : MonoBehaviour
             }
             if(other.gameObject.CompareTag("Spell"))
             {
-                Destroy(gameObject);
-                Destroy(other.gameObject);
+                SpellCollision(other.gameObject);
             }
         }
     }
     void OnDestroy()
     {
-        // instantiating and destroying explosion prefab
-        
         GameObject Explosion = Instantiate(spell.ExplodePreFab, transform.position, Quaternion.identity);
+        Destroy(Explosion, 1f);
+    }
+    void AdvnacedDestroy(GameObject collisionEffect)
+    {
+        GameObject Explosion = Instantiate(collisionEffect, transform.position, Quaternion.identity);
         Destroy(Explosion, 1f);
     }
     void ShotByPlayerCheck()
@@ -111,6 +118,40 @@ public class SpellBase : MonoBehaviour
         else
         {
             spell.player.GetComponent<Collider2D>().excludeLayers = spell.Default;
+        }
+    }
+
+    void SpellCollision(GameObject other)
+    {
+        if(spell.damageType == other.GetComponent<SpellBase>().spell.damageType)
+        {
+            if(spell.damageType == "Arcane")
+            {
+                AdvnacedDestroy(arcaneSelfCollision);
+            }
+            if(spell.damageType == "Fire")
+            {
+                AdvnacedDestroy(FireSelfCollision);
+            }
+            if(spell.damageType == "Umbral")
+            {
+                AdvnacedDestroy(umbralSelfCollision);
+            }
+        }
+        else
+        {
+            if((spell.damageType == "Arcane" && other.GetComponent<SpellBase>().spell.damageType == "Umbral")||(spell.damageType == "Umbral" && other.GetComponent<SpellBase>().spell.damageType == "Arcane"))
+            {
+                AdvnacedDestroy(ArcaneUmbralCollision);
+            }
+            if((spell.damageType == "Umbral" && other.GetComponent<SpellBase>().spell.damageType == "Fire")||(spell.damageType == "Fire" && other.GetComponent<SpellBase>().spell.damageType == "Umbral"))
+            {
+                AdvnacedDestroy(FireUmbralCollision);
+            }
+            if((spell.damageType == "Arcane" && other.GetComponent<SpellBase>().spell.damageType == "Fire")||(spell.damageType == "Fire" && other.GetComponent<SpellBase>().spell.damageType == "Arcane"))
+            {
+                AdvnacedDestroy(FireArcaneCollision);
+            }
         }
     }
 }
