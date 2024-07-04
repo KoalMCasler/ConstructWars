@@ -587,6 +587,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 346346848}
     m_Modifications:
     - target: {fileID: 3605244523774196704, guid: 19b1df9183f13f448ab1d50dce4d9107, type: 3}
+      propertyPath: spell
+      value: 
+      objectReference: {fileID: 7070982434306895802, guid: 47ae91b80cfea584796e11fff9d926eb, type: 3}
+    - target: {fileID: 3605244523774196704, guid: 19b1df9183f13f448ab1d50dce4d9107, type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 6883052}

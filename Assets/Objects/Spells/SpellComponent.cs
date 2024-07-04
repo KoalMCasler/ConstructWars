@@ -20,8 +20,6 @@ public class SpellComponent : ScriptableObject
     public int shotDelay; //In seconds
     [SerializeField]
     public float shotSpeed;
-    [SerializeField]
-    public bool shotByPlayer;
     [Header("Object Referances")]
     public GameObject player;
     public GameObject Crosshair;

@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
                 ShotTimer = 0;
                 //Creates and fires projectile
                 GameObject Projectile = Instantiate(spellArray[spellIndex], firePoint.position, firePoint.rotation);
-                Projectile.GetComponent<SpellBase>().spell.shotByPlayer = true;
+                Projectile.GetComponent<SpellBase>().shotByPlayer = true;
                 Projectile.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce);
             }
             else

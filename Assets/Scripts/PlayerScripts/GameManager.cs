@@ -41,7 +41,8 @@ public class GameManager : MonoBehaviour
         uIManager.SetMainMenuActive();
         Cursor.visible = true;
         player.GetComponent<PlayerController>().Crosshair.SetActive(false);
-        player.SetActive(false);
+        player.GetComponent<PlayerController>().CalculateStats();
+        playerArt.GetComponent<SpriteRenderer>().enabled = false;
     }
     void Gameplay()
     {
@@ -49,7 +50,8 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false;
         player.GetComponent<PlayerController>().Crosshair.SetActive(true);
         uIManager.SetHUDActive();
-        player.SetActive(true);
+        player.GetComponent<PlayerController>().CalculateStats();
+        playerArt.GetComponent<SpriteRenderer>().enabled = true;
     }
     void Paused()
     {

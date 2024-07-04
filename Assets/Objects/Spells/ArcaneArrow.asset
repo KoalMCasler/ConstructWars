@@ -15,15 +15,14 @@ MonoBehaviour:
   spellName: Arcane Arrow
   damage: 150
   damageType: Arcane
-  shotLife: 6
+  shotLife: 8
   maxShotLife: 8
   shotDelay: 4
   shotSpeed: 12.5
-  shotByPlayer: 1
   player: {fileID: 0}
   Crosshair: {fileID: 0}
   ExplodePreFab: {fileID: 5322951778073131205, guid: fa869dfe77a155442bfa6b97143e49fd, type: 3}
-  distance: 6.042104
+  distance: 11.442784
   playerLayer:
     serializedVersion: 2
     m_Bits: 8

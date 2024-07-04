@@ -12,6 +12,7 @@ public class SpellBase : MonoBehaviour
     public GameObject FireArcaneCollision;
     public GameObject FireUmbralCollision;
     public GameObject ArcaneUmbralCollision;
+    public bool shotByPlayer;
     void Start()
     {
         spell.player = GameObject.FindWithTag("Player");
@@ -31,7 +32,7 @@ public class SpellBase : MonoBehaviour
     void Update()
     {
         
-        if(spell.shotByPlayer)
+        if(shotByPlayer)
         {
             spell.distance = Vector2.Distance(transform.position,spell.Crosshair.transform.position);
             Vector2 direction = spell.Crosshair.transform.position - transform.position;
@@ -49,14 +50,14 @@ public class SpellBase : MonoBehaviour
     void FixedUpdate()
     {
         //Makes shot face crosshair.
-        if(spell.shotByPlayer)
+        if(shotByPlayer)
         {
             Vector2 aimDirection = spell.player.GetComponent<PlayerController>().mousePosition - rb.position;
 
             float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
             rb.rotation = aimAngle;
         }
-        if(!spell.shotByPlayer)
+        if(!shotByPlayer)
         {
             Vector2 aimDirection = new Vector2();
             aimDirection.y = spell.player.transform.position.y - rb.position.y;
@@ -68,7 +69,7 @@ public class SpellBase : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D other)
     {
-        if(spell.shotByPlayer)
+        if(shotByPlayer)
         {
             //ignores player
             if(!other.gameObject.CompareTag("Player"))
@@ -86,7 +87,7 @@ public class SpellBase : MonoBehaviour
                 SpellCollision(other.gameObject);
             }
         }
-        if(!spell.shotByPlayer)
+        if(!shotByPlayer)
         {
             if(other.gameObject.CompareTag("Player"))
             {
@@ -102,23 +103,12 @@ public class SpellBase : MonoBehaviour
     void OnDestroy()
     {
         GameObject Explosion = Instantiate(spell.ExplodePreFab, transform.position, Quaternion.identity);
-        Destroy(Explosion, 1f);
+        Destroy(Explosion, 12f);
     }
     void AdvnacedDestroy(GameObject collisionEffect)
     {
         GameObject Explosion = Instantiate(collisionEffect, transform.position, Quaternion.identity);
-        Destroy(Explosion, 1f);
-    }
-    void ShotByPlayerCheck()
-    {
-        if(spell.shotByPlayer)
-        {
-            spell.player.GetComponent<Collider2D>().excludeLayers = spell.playerLayer;
-        }
-        else
-        {
-            spell.player.GetComponent<Collider2D>().excludeLayers = spell.Default;
-        }
+        Destroy(Explosion, 12f);
     }
 
     void SpellCollision(GameObject other)
@@ -128,14 +118,17 @@ public class SpellBase : MonoBehaviour
             if(spell.damageType == "Arcane")
             {
                 AdvnacedDestroy(arcaneSelfCollision);
+                Destroy(other);
             }
             if(spell.damageType == "Fire")
             {
                 AdvnacedDestroy(FireSelfCollision);
+                Destroy(other);
             }
             if(spell.damageType == "Umbral")
             {
                 AdvnacedDestroy(umbralSelfCollision);
+                Destroy(other);
             }
         }
         else
@@ -143,14 +136,17 @@ public class SpellBase : MonoBehaviour
             if((spell.damageType == "Arcane" && other.GetComponent<SpellBase>().spell.damageType == "Umbral")||(spell.damageType == "Umbral" && other.GetComponent<SpellBase>().spell.damageType == "Arcane"))
             {
                 AdvnacedDestroy(ArcaneUmbralCollision);
+                Destroy(other);
             }
             if((spell.damageType == "Umbral" && other.GetComponent<SpellBase>().spell.damageType == "Fire")||(spell.damageType == "Fire" && other.GetComponent<SpellBase>().spell.damageType == "Umbral"))
             {
                 AdvnacedDestroy(FireUmbralCollision);
+                Destroy(other);
             }
             if((spell.damageType == "Arcane" && other.GetComponent<SpellBase>().spell.damageType == "Fire")||(spell.damageType == "Fire" && other.GetComponent<SpellBase>().spell.damageType == "Arcane"))
             {
                 AdvnacedDestroy(FireArcaneCollision);
+                Destroy(other);
             }
         }
     }
