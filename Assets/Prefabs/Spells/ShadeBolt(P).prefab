@@ -131,7 +131,7 @@ CircleCollider2D:
     m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -171,6 +171,13 @@ MonoBehaviour:
   FireArcaneCollision: {fileID: 118258162890921261, guid: e006dd65c00dcf5479bd22235d4b85f8, type: 3}
   FireUmbralCollision: {fileID: 2541818490521565048, guid: 961fa28c0c9da1746afcbaf37169b4ac, type: 3}
   ArcaneUmbralCollision: {fileID: 3440842375981589744, guid: a04967e04ce1b7c4cbc27397d3fea571, type: 3}
+  shotByPlayer: 0
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  playerLayers:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!198 &8741800473730346559
 ParticleSystem:
   m_ObjectHideFlags: 0

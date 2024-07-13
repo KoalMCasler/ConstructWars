@@ -13,6 +13,8 @@ public class SpellBase : MonoBehaviour
     public GameObject FireUmbralCollision;
     public GameObject ArcaneUmbralCollision;
     public bool shotByPlayer;
+    public LayerMask enemyLayers;
+    public LayerMask playerLayers;
     void Start()
     {
         spell.player = GameObject.FindWithTag("Player");
@@ -36,14 +38,14 @@ public class SpellBase : MonoBehaviour
         {
             spell.distance = Vector2.Distance(transform.position,spell.Crosshair.transform.position);
             Vector2 direction = spell.Crosshair.transform.position - transform.position;
-
+            //gameObject.GetComponent<Collider2D>().includeLayers = playerLayers;
             transform.position = Vector2.MoveTowards(this.transform.position,spell.Crosshair.transform.position,spell.shotSpeed * Time.deltaTime);
         }
         else
         {
             spell.distance = Vector2.Distance(transform.position,spell.player.transform.position);
             Vector2 direction = spell.player.transform.position - transform.position;
-
+            //gameObject.GetComponent<Collider2D>().includeLayers = enemyLayers;
             transform.position = Vector2.MoveTowards(this.transform.position,spell.player.transform.position,spell.shotSpeed * Time.deltaTime);
         }
     }
@@ -53,7 +55,7 @@ public class SpellBase : MonoBehaviour
         if(shotByPlayer)
         {
             Vector2 aimDirection = spell.player.GetComponent<PlayerController>().mousePosition - rb.position;
-
+            gameObject.GetComponent<Collider2D>().excludeLayers = playerLayers;
             float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
             rb.rotation = aimAngle;
         }
@@ -62,7 +64,7 @@ public class SpellBase : MonoBehaviour
             Vector2 aimDirection = new Vector2();
             aimDirection.y = spell.player.transform.position.y - rb.position.y;
             aimDirection.x = spell.player.transform.position.x - rb.position.x;
-
+            gameObject.GetComponent<Collider2D>().excludeLayers = enemyLayers;
             float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
             rb.rotation = aimAngle;
         }

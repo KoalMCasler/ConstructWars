@@ -172,6 +172,7 @@ public class UIManager : MonoBehaviour
     {
         UpdateActiveSpell();
         shotCoolDownSlider.maxValue = player.GetComponent<PlayerController>().ReturneShotDelay();
+        healthBar.maxValue = player.GetComponent<PlayerController>().playerStats.maxHP;
         healthBar.value = player.GetComponent<PlayerController>().ReturnCurrentHP();
         killCountText = string.Format("Remaining Enemies\n\n{0}/{1} ",killCount,totalEnemies);
         killCountObject.text = killCountText;
