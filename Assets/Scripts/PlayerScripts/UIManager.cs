@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
     private string killCountText;
     public int totalEnemies;
     public Slider shotCoolDownSlider;
+    public Slider abilityCoolDownSlider;
     public InputActionAsset inputAction;
     [Header("Player workshop stats")]
     public TextMeshProUGUI workshopHP;
@@ -168,12 +169,14 @@ public class UIManager : MonoBehaviour
         workshop.SetActive(true);
     }
 
-    void UpdateHUD()
+    public void UpdateHUD()
     {
         UpdateActiveSpell();
         shotCoolDownSlider.maxValue = player.GetComponent<PlayerController>().ReturneShotDelay();
         healthBar.maxValue = player.GetComponent<PlayerController>().playerStats.maxHP;
         healthBar.value = player.GetComponent<PlayerController>().ReturnCurrentHP();
+        abilityCoolDownSlider.maxValue = player.GetComponent<PlayerController>().altfire.abilityMaxDuration;
+        abilityCoolDownSlider.value = player.GetComponent<PlayerController>().altfire.abilityDuration;
         killCountText = string.Format("Remaining Enemies\n\n{0}/{1} ",killCount,totalEnemies);
         killCountObject.text = killCountText;
         shotCoolDownSlider.value = player.GetComponent<PlayerController>().ReturneShotTimer();

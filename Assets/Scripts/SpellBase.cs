@@ -84,6 +84,10 @@ public class SpellBase : MonoBehaviour
                 //Destory self as long as not hitting the player
                 Destroy(gameObject);
             }
+            if(other.gameObject.CompareTag("PlayerShield"))
+            {
+                Destroy(gameObject);
+            }
             if(other.gameObject.CompareTag("Spell"))
             {
                 SpellCollision(other.gameObject);
@@ -94,6 +98,10 @@ public class SpellBase : MonoBehaviour
             if(other.gameObject.CompareTag("Player"))
             {
                 other.gameObject.GetComponent<PlayerController>().currentHP -= ((float)spell.damage) - spell.player.GetComponent<PlayerController>().playerStats.DamageResitance;
+                Destroy(gameObject);
+            }
+            if(other.gameObject.CompareTag("PlayerShield"))
+            {
                 Destroy(gameObject);
             }
             if(other.gameObject.CompareTag("Spell"))

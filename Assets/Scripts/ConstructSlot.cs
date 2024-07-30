@@ -28,22 +28,22 @@ public class ConstructSlot : MonoBehaviour, IDropHandler
                 }
                 else if(dropped.GetComponent<InventoryItem>().itemType == "Origin")
                 {
-                    player.origin = dropped;
+                    player.origin = dropped.GetComponent<InventoryItem>();
                     player.CalculateStats();
                 }
                 else if(dropped.GetComponent<InventoryItem>().itemType == "Heart")
                 {
-                    player.heart = dropped;
+                    player.heart = dropped.GetComponent<InventoryItem>();
                     player.CalculateStats();
                 }
                 else if(dropped.GetComponent<InventoryItem>().itemType == "Utility")
                 {
-                    player.utility = dropped;
+                    player.utility = dropped.GetComponent<InventoryItem>();
                     player.CalculateStats();
                 }
                 else if(dropped.GetComponent<InventoryItem>().itemType == "Mobility")
                 {
-                    player.mobility = dropped;
+                    player.mobility = dropped.GetComponent<InventoryItem>();
                     player.CalculateStats();
                 }
                 dropped.GetComponent<Draggable>().parentAfterDrag = transform;

@@ -12,6 +12,7 @@ TagManager:
   - Surface
   - Walls
   - UI
+  - PlayerShield
   layers:
   - Default
   - TransparentFX

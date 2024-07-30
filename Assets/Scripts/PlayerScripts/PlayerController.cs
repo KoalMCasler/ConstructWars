@@ -16,11 +16,12 @@ public class PlayerController : MonoBehaviour
     public Stats playerStats;
     [Header("Player Build")]
     public GameObject Body;
-    public GameObject origin;
-    public GameObject heart;
-    public GameObject utility;
-    public GameObject mobility;
+    public InventoryItem origin;
+    public InventoryItem heart;
+    public InventoryItem utility;
+    public InventoryItem mobility;
     public GameObject[] spellArray = new GameObject[3];
+    public Altfire altfire;
     [Header("Movement variables")]
     //public float moveSpeed = 5f;
     //public float maxMoveSpeed = 10f;
@@ -97,6 +98,11 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    void OnAltFire()
+    {
+        altfire.Activate();
+        Debug.Log("Alt fire triggered");
+    }
     void OnCollisionEnter2D(Collision2D other)
     {
         //Hurts player if they touch an enemy. 
@@ -112,7 +118,7 @@ public class PlayerController : MonoBehaviour
     }
     void CheckStatus()
     {
-        if(currentHP <= 0)
+        if(currentHP <= 0 && gameManager.gameState == GameManager.GameState.Gameplay)
         {
             Debug.Log("You Died");
             SceneManager.LoadScene(0);
@@ -175,18 +181,18 @@ public class PlayerController : MonoBehaviour
     {
         if(origin != null)
         {
-            playerStats.maxHPBase = origin.GetComponent<InventoryItem>().HPMod;
-            playerStats.DamageResitanceBase = origin.GetComponent<InventoryItem>().DRMod;
-            playerStats.DamageModifierBase = origin.GetComponent<InventoryItem>().DMMod;
-            playerStats.SpellChargeRateBase = origin.GetComponent<InventoryItem>().CoolDownReduction;
-            playerStats.LuckBase = origin.GetComponent<InventoryItem>().LuckMod;
-            playerStats.moveSpeedBase = origin.GetComponent<InventoryItem>().MSMod;
-            Body.GetComponent<SpriteRenderer>().sprite = origin.GetComponent<InventoryItem>().origin.GetComponent<SpriteRenderer>().sprite;
+            playerStats.maxHPBase = origin.HPMod;
+            playerStats.DamageResitanceBase = origin.DRMod;
+            playerStats.DamageModifierBase = origin.DMMod;
+            playerStats.SpellChargeRateBase = origin.CoolDownReduction;
+            playerStats.LuckBase = origin.LuckMod;
+            playerStats.moveSpeedBase = origin.MSMod;
+            Body.GetComponent<SpriteRenderer>().sprite = origin.origin.GetComponent<SpriteRenderer>().sprite;
         }
         if(heart != null)
         {
-            playerStats.maxHP = playerStats.maxHPBase + heart.GetComponent<InventoryItem>().HPMod;
-            playerStats.DamageResitance = playerStats.DamageResitanceBase + heart.GetComponent<InventoryItem>().DRMod;
+            playerStats.maxHP = playerStats.maxHPBase + heart.HPMod;
+            playerStats.DamageResitance = playerStats.DamageResitanceBase + heart.DRMod;
         }
         else
         {
@@ -195,9 +201,9 @@ public class PlayerController : MonoBehaviour
         }
         if(utility != null)
         {
-            playerStats.DamageModifier = playerStats.DamageModifierBase + utility.GetComponent<InventoryItem>().DMMod;
-            playerStats.SpellChargeRate = playerStats.SpellChargeRateBase + utility.GetComponent<InventoryItem>().CoolDownReduction;
-            playerStats.Luck = playerStats.LuckBase + utility.GetComponent<InventoryItem>().LuckMod;
+            playerStats.DamageModifier = playerStats.DamageModifierBase + utility.DMMod;
+            playerStats.SpellChargeRate = playerStats.SpellChargeRateBase + utility.CoolDownReduction;
+            playerStats.Luck = playerStats.LuckBase + utility.LuckMod;
         }
         else
         {
@@ -207,7 +213,7 @@ public class PlayerController : MonoBehaviour
         }
         if(mobility != null)
         {
-            playerStats.moveSpeed = playerStats.moveSpeedBase + mobility.GetComponent<InventoryItem>().MSMod;
+            playerStats.moveSpeed = playerStats.moveSpeedBase + mobility.MSMod;
         }
         else
         {
