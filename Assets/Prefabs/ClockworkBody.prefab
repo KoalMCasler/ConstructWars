@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3589482451107172206}
   - component: {fileID: 1283120616850317113}
   m_Layer: 3
-  m_Name: Body
+  m_Name: ClockworkBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
