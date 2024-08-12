@@ -14,10 +14,6 @@ public class UIManager : MonoBehaviour
     public GameObject player;
     public bool isPaused;
     public Slider healthBar;
-    public TextMeshProUGUI killCountObject;
-    public int killCount;
-    private string killCountText;
-    public int totalEnemies;
     public Slider shotCoolDownSlider;
     public Slider abilityCoolDownSlider;
     public InputActionAsset inputAction;
@@ -48,7 +44,6 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player");
-        killCount = totalEnemies;
         healthBar.maxValue = player.GetComponent<PlayerController>().ReturnMaxHP();
         healthBar.value = player.GetComponent<PlayerController>().ReturnCurrentHP();
         shotCoolDownSlider.maxValue = player.GetComponent<PlayerController>().ReturneShotDelay();
@@ -71,10 +66,6 @@ public class UIManager : MonoBehaviour
         {
             EnterArenaButton.interactable = true;
         }
-    }
-    public void UpdateKillCount()
-    {
-        killCount -= 1;
     }
     void UpdateActiveSpell()
     {
@@ -177,8 +168,6 @@ public class UIManager : MonoBehaviour
         healthBar.value = player.GetComponent<PlayerController>().ReturnCurrentHP();
         abilityCoolDownSlider.maxValue = player.GetComponent<PlayerController>().altfire.abilityMaxDuration;
         abilityCoolDownSlider.value = player.GetComponent<PlayerController>().altfire.abilityDuration;
-        killCountText = string.Format("Remaining Enemies\n\n{0}/{1} ",killCount,totalEnemies);
-        killCountObject.text = killCountText;
         shotCoolDownSlider.value = player.GetComponent<PlayerController>().ReturneShotTimer();
     }
 

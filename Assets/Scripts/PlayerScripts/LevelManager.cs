@@ -7,6 +7,7 @@ using Cinemachine;
 public class LevelManager : MonoBehaviour
 {
     public GameManager gameManager;
+    public UIManager uIManager;
     public GameObject player;
     public GameObject mainCamera;
     public Collider2D foundBoundingShape;
@@ -14,6 +15,7 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player");
+        uIManager = FindObjectOfType<UIManager>();
     }
     public void LoadThisScene(string sceneName)
     {
@@ -22,6 +24,8 @@ public class LevelManager : MonoBehaviour
         {
             gameManager.gameState = GameManager.GameState.Gameplay;
             gameManager.ChangeGameState();
+            player.GetComponent<PlayerController>().CalculateStats();
+            player.GetComponent<PlayerController>().altfire.ArenaStart();
         }
         else if(sceneName == "MainMenu")
         {
@@ -36,5 +40,6 @@ public class LevelManager : MonoBehaviour
         confiner2D.m_BoundingShape2D = foundBoundingShape;
         player.transform.position = GameObject.FindWithTag("Spawn").transform.position;
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        uIManager.UpdateHUD();
     }
 }

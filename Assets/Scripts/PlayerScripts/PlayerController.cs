@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement variables")]
     //public float moveSpeed = 5f;
     //public float maxMoveSpeed = 10f;
-    private float activeMoveSpeed;
+    public float activeMoveSpeed;
     Vector2 moveDirection;
     [Header("Attack/Aim Varables")]
     public int spellIndex;
@@ -219,6 +219,7 @@ public class PlayerController : MonoBehaviour
         {
             playerStats.moveSpeed = playerStats.moveSpeedBase;
         }
+        currentHP = playerStats.maxHP;
     }
 
     void ResetStats() //Used for a clean start
