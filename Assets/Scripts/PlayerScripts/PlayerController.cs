@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public UIManager uIManager;
     public GameManager gameManager;
     public GameObject Crosshair;
-    public Transform firePoint;
+    public GameObject firePoint;
     public Rigidbody2D rb;
     public Stats playerStats;
     [Header("Player Build")]
@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
         //Current move speed
         activeMoveSpeed = playerStats.moveSpeed;
         spellIndex = 0;
+        firePoint = GameObject.FindWithTag("SpellPoint");
         CalculateStats();
     }
 
@@ -81,15 +82,16 @@ public class PlayerController : MonoBehaviour
         //Prevents player for fiering when pasued. 
         if(gameManager.gameState == GameManager.GameState.Gameplay)
         {
+            firePoint = GameObject.FindWithTag("SpellPoint");
             //Lets shot only take place if cooldown has happened
             if(ShotTimer >= ShotDelay)
             {
                 //Resets shot timer
                 ShotTimer = 0;
                 //Creates and fires projectile
-                GameObject Projectile = Instantiate(spellArray[spellIndex], firePoint.position, firePoint.rotation);
+                GameObject Projectile = Instantiate(spellArray[spellIndex], firePoint.transform.position, firePoint.transform.rotation);
                 Projectile.GetComponent<SpellBase>().shotByPlayer = true;
-                Projectile.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce);
+                Projectile.GetComponent<Rigidbody2D>().AddForce(firePoint.transform.up * fireForce);
             }
             else
             {
@@ -187,7 +189,12 @@ public class PlayerController : MonoBehaviour
             playerStats.SpellChargeRateBase = origin.CoolDownReduction;
             playerStats.LuckBase = origin.LuckMod;
             playerStats.moveSpeedBase = origin.MSMod;
-            Body.GetComponent<SpriteRenderer>().sprite = origin.origin.GetComponent<SpriteRenderer>().sprite;
+            
+            //Makes sure body matches origin. 
+            Destroy(Body);
+            Body = Instantiate(origin.origin, this.transform);
+            firePoint = GameObject.FindWithTag("SpellPoint");
+            gameManager.TogglePlayerSprite(false);
         }
         if(heart != null)
         {

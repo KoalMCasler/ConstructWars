@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1283120616850317113}
   m_Layer: 3
   m_Name: ClockworkBody
-  m_TagString: Untagged
+  m_TagString: Body
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,8 +96,8 @@ GameObject:
   - component: {fileID: 6597228865104749293}
   - component: {fileID: 3211851404736946867}
   m_Layer: 3
-  m_Name: FrontMarker
-  m_TagString: Untagged
+  m_Name: SpellPoint
+  m_TagString: SpellPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 public class ConstructSlot : MonoBehaviour, IDropHandler
 {
     private GameObject dropped;
+    private GameObject currentItem;
     public PlayerController player;
     public string slotType;
     [Header("Only for spell slots")]
@@ -15,43 +16,58 @@ public class ConstructSlot : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
+        dropped = eventData.pointerDrag;
         if(transform.childCount == 0)
         {
-            dropped = eventData.pointerDrag;
             dropped.GetComponent<Draggable>().isEquipped = true;
-            if(dropped.gameObject.GetComponent<InventoryItem>().itemType == slotType)
-            {   
-
-                if(dropped.GetComponent<InventoryItem>().itemType == "Spell")
-                {
-                    player.spellArray[SpellSlotNumber] = dropped.GetComponent<InventoryItem>().Spell;
-                }
-                else if(dropped.GetComponent<InventoryItem>().itemType == "Origin")
-                {
-                    player.origin = dropped.GetComponent<InventoryItem>();
-                    player.CalculateStats();
-                }
-                else if(dropped.GetComponent<InventoryItem>().itemType == "Heart")
-                {
-                    player.heart = dropped.GetComponent<InventoryItem>();
-                    player.CalculateStats();
-                }
-                else if(dropped.GetComponent<InventoryItem>().itemType == "Utility")
-                {
-                    player.utility = dropped.GetComponent<InventoryItem>();
-                    player.CalculateStats();
-                }
-                else if(dropped.GetComponent<InventoryItem>().itemType == "Mobility")
-                {
-                    player.mobility = dropped.GetComponent<InventoryItem>();
-                    player.CalculateStats();
-                }
-                dropped.GetComponent<Draggable>().parentAfterDrag = transform;
-            }
-            else
+            currentItem = dropped;
+            CheckCurrentItem();  
+            currentItem.GetComponent<Draggable>().parentAfterDrag = transform; 
+        }
+        if(transform.childCount == 1 && dropped.GetComponent<InventoryItem>().itemType == currentItem.GetComponent<InventoryItem>().itemType)
+        {
+            //Debug.Log("Swaping Items");
+            currentItem.GetComponent<Draggable>().isEquipped = false;
+            dropped.GetComponent<Draggable>().isEquipped = true;
+            currentItem.GetComponent<Draggable>().parentAfterDrag = dropped.GetComponent<Draggable>().parentAfterDrag;
+            currentItem.GetComponent<Draggable>().OnEndDrag(eventData);
+            currentItem = dropped;
+            CheckCurrentItem();
+            currentItem.GetComponent<Draggable>().parentAfterDrag = transform;
+        }
+    }
+    void CheckCurrentItem()
+    {
+        if(currentItem.gameObject.GetComponent<InventoryItem>().itemType == slotType)
+        {   
+            if(currentItem.GetComponent<InventoryItem>().itemType == "Spell")
             {
-                return;
+                player.spellArray[SpellSlotNumber] = currentItem.GetComponent<InventoryItem>().Spell;
             }
+            else if(currentItem.GetComponent<InventoryItem>().itemType == "Origin")
+            {                    
+                player.origin = currentItem.GetComponent<InventoryItem>();
+                player.CalculateStats();
+            }
+            else if(dropped.GetComponent<InventoryItem>().itemType == "Heart")
+            {                    
+                player.heart = currentItem.GetComponent<InventoryItem>();
+                player.CalculateStats();
+            }
+            else if(dropped.GetComponent<InventoryItem>().itemType == "Utility")
+            {
+                player.utility = currentItem.GetComponent<InventoryItem>();
+                player.CalculateStats();
+            }
+            else if(dropped.GetComponent<InventoryItem>().itemType == "Mobility")
+            {
+                player.mobility = currentItem.GetComponent<InventoryItem>();
+                player.CalculateStats();
+            }
+        }
+        else
+        {
+            return;
         }
     }
 }

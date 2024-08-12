@@ -22,10 +22,10 @@ public class LevelManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
         if(sceneName.StartsWith("Arena"))
         {
+            //player.GetComponent<PlayerController>().CalculateStats();
+            player.GetComponent<PlayerController>().altfire.ArenaStart();
             gameManager.gameState = GameManager.GameState.Gameplay;
             gameManager.ChangeGameState();
-            player.GetComponent<PlayerController>().CalculateStats();
-            player.GetComponent<PlayerController>().altfire.ArenaStart();
         }
         else if(sceneName == "MainMenu")
         {
@@ -41,5 +41,9 @@ public class LevelManager : MonoBehaviour
         player.transform.position = GameObject.FindWithTag("Spawn").transform.position;
         SceneManager.sceneLoaded -= OnSceneLoaded;
         uIManager.UpdateHUD();
+        if(player.GetComponent<PlayerController>().origin.originType == "Clockwork")
+        {
+            player.GetComponent<PlayerController>().altfire.Activate();
+        }
     }
 }

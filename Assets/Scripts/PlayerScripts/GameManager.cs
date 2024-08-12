@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     public PlayerController playerController;
 
     public GameObject player;
-    public GameObject spawnPoint;
     public GameObject playerArt;
     
     public enum GameState{ MainMenu, Gameplay, Paused, Options, MatchLoss, MatchWin}
@@ -42,7 +41,7 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true;
         player.GetComponent<PlayerController>().Crosshair.SetActive(false);
         player.GetComponent<PlayerController>().CalculateStats();
-        playerArt.GetComponent<SpriteRenderer>().enabled = false;
+        TogglePlayerSprite(false);
     }
     void Gameplay()
     {
@@ -51,7 +50,7 @@ public class GameManager : MonoBehaviour
         player.GetComponent<PlayerController>().Crosshair.SetActive(true);
         uIManager.SetHUDActive();
         player.GetComponent<PlayerController>().CalculateStats();
-        playerArt.GetComponent<SpriteRenderer>().enabled = true;
+        TogglePlayerSprite(true);
     }
     void Paused()
     {
@@ -73,5 +72,17 @@ public class GameManager : MonoBehaviour
     void MatchWin()
     {
 
+    }
+    public void TogglePlayerSprite(bool desiredState)
+    {
+        playerArt = GameObject.FindWithTag("Body");
+        if(desiredState == true)
+        {
+            playerArt.GetComponent<SpriteRenderer>().enabled = true;
+        }
+        if(desiredState == false)
+        {
+            playerArt.GetComponent<SpriteRenderer>().enabled = false;
+        }
     }
 }

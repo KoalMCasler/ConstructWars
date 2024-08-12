@@ -13,6 +13,8 @@ TagManager:
   - Walls
   - UI
   - PlayerShield
+  - SpellPoint
+  - Body
   layers:
   - Default
   - TransparentFX
