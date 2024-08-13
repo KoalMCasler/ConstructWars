@@ -26,6 +26,7 @@ public class ConstructSlot : MonoBehaviour, IDropHandler
         }
         if(transform.childCount == 1 && dropped.GetComponent<InventoryItem>().itemType == currentItem.GetComponent<InventoryItem>().itemType)
         {
+            //Swaps items if they match type. 
             //Debug.Log("Swaping Items");
             currentItem.GetComponent<Draggable>().isEquipped = false;
             dropped.GetComponent<Draggable>().isEquipped = true;
@@ -36,7 +37,7 @@ public class ConstructSlot : MonoBehaviour, IDropHandler
             currentItem.GetComponent<Draggable>().parentAfterDrag = transform;
         }
     }
-    void CheckCurrentItem()
+    public void CheckCurrentItem()
     {
         if(currentItem.gameObject.GetComponent<InventoryItem>().itemType == slotType)
         {   
