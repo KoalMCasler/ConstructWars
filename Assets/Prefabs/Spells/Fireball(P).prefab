@@ -174,10 +174,14 @@ MonoBehaviour:
   shotByPlayer: 0
   enemyLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   playerLayers:
     serializedVersion: 2
     m_Bits: 8
+  defaultLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  target: {fileID: 0}
 --- !u!198 &3709607194787235292
 ParticleSystem:
   m_ObjectHideFlags: 0

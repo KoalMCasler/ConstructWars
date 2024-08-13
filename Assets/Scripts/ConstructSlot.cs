@@ -17,7 +17,7 @@ public class ConstructSlot : MonoBehaviour, IDropHandler
     public void OnDrop(PointerEventData eventData)
     {
         dropped = eventData.pointerDrag;
-        if(transform.childCount == 0)
+        if(transform.childCount == 0 && dropped.GetComponent<InventoryItem>().itemType == slotType)
         {
             dropped.GetComponent<Draggable>().isEquipped = true;
             currentItem = dropped;

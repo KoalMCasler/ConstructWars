@@ -15,6 +15,10 @@ public class SpellBase : MonoBehaviour
     public bool shotByPlayer;
     public LayerMask enemyLayers;
     public LayerMask playerLayers;
+    public LayerMask defaultLayers;
+    public Transform target;
+    private float shotTime;
+    public GameObject firedFrom;
     void Start()
     {
         spell.player = GameObject.FindWithTag("Player");
@@ -29,11 +33,22 @@ public class SpellBase : MonoBehaviour
         }
         Destroy(gameObject, spell.shotLife);
     }
-
+    void Awake()
+    {
+        
+    }
     // Update is called once per frame
     void Update()
     {
-        
+        shotTime += Time.deltaTime;
+        if(shotTime < 2)
+        {
+            gameObject.GetComponent<Collider2D>().excludeLayers = enemyLayers;
+        }
+        else
+        {
+            gameObject.GetComponent<Collider2D>().excludeLayers = defaultLayers;
+        }
         if(shotByPlayer)
         {
             spell.distance = Vector2.Distance(transform.position,spell.Crosshair.transform.position);
@@ -43,10 +58,10 @@ public class SpellBase : MonoBehaviour
         }
         else
         {
-            spell.distance = Vector2.Distance(transform.position,spell.player.transform.position);
-            Vector2 direction = spell.player.transform.position - transform.position;
+            spell.distance = Vector2.Distance(transform.position,target.position);
+            Vector2 direction = target.position - transform.position;
             //gameObject.GetComponent<Collider2D>().includeLayers = enemyLayers;
-            transform.position = Vector2.MoveTowards(this.transform.position,spell.player.transform.position,spell.shotSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(this.transform.position,target.position,spell.shotSpeed * Time.deltaTime);
         }
     }
     void FixedUpdate()
@@ -64,7 +79,7 @@ public class SpellBase : MonoBehaviour
             Vector2 aimDirection = new Vector2();
             aimDirection.y = spell.player.transform.position.y - rb.position.y;
             aimDirection.x = spell.player.transform.position.x - rb.position.x;
-            gameObject.GetComponent<Collider2D>().excludeLayers = enemyLayers;
+            gameObject.GetComponent<Collider2D>().excludeLayers = defaultLayers;
             float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
             rb.rotation = aimAngle;
         }
@@ -79,7 +94,7 @@ public class SpellBase : MonoBehaviour
                 //collides with enemy
                 if(other.gameObject.CompareTag("Enemy"))
                 {
-                    other.gameObject.GetComponent<Enemy>().health -= ((float)spell.damage)* spell.player.GetComponent<PlayerController>().playerStats.DamageModifier;
+                    other.gameObject.GetComponent<Enemy>().currentHP -= ((float)spell.damage)* spell.player.GetComponent<PlayerController>().playerStats.DamageModifier;
                 }
                 //Destory self as long as not hitting the player
                 Destroy(gameObject);
@@ -98,6 +113,12 @@ public class SpellBase : MonoBehaviour
             if(other.gameObject.CompareTag("Player"))
             {
                 other.gameObject.GetComponent<PlayerController>().currentHP -= ((float)spell.damage) - spell.player.GetComponent<PlayerController>().playerStats.DamageResitance;
+                Destroy(gameObject);
+            }
+            //collides with enemy
+            if(other.gameObject.CompareTag("Enemy") && other.gameObject != firedFrom)
+            {
+                other.gameObject.GetComponent<Enemy>().currentHP -= ((float)spell.damage)* spell.player.GetComponent<PlayerController>().playerStats.DamageModifier;
                 Destroy(gameObject);
             }
             if(other.gameObject.CompareTag("PlayerShield"))
