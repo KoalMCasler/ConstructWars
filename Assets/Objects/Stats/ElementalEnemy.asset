@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 16e8e0df51ec5a5458fe5cd7cd5422bb, type: 3}
-  m_Name: PlayerStats
+  m_Name: ElementalEnemy
   m_EditorClassIdentifier: 
-  maxHP: 400
-  maxHPBase: 400
-  DamageResitance: 2
-  DamageResitanceBase: 2
-  DamageModifier: 1
-  DamageModifierBase: 1
-  SpellChargeRate: 1
-  SpellChargeRateBase: 1
-  Luck: 1
-  LuckBase: 1
-  moveSpeed: 10
+  maxHP: 150
+  maxHPBase: 150
+  DamageResitance: 0
+  DamageResitanceBase: 0
+  DamageModifier: 0
+  DamageModifierBase: 0
+  SpellChargeRate: 0
+  SpellChargeRateBase: 0
+  Luck: 0
+  LuckBase: 0
+  moveSpeed: 6
   moveSpeedBase: 6
-  maxMoveSpeed: 10
+  maxMoveSpeed: 20

@@ -9497,7 +9497,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7339164256336213132, guid: 7772ec1a614a026479fc1037dfdda62e, type: 3}
       propertyPath: HPMod
-      value: 3500
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 7339164256336213132, guid: 7772ec1a614a026479fc1037dfdda62e, type: 3}
       propertyPath: MSMod
