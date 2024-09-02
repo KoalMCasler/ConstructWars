@@ -74,7 +74,7 @@ public class Altfire : MonoBehaviour
                     }
                 }
             }
-            if(playerCon.origin.originType == "Spiritual")
+            if(playerCon.origin.originType == "Umbral")
             {
                 
             }

@@ -15,6 +15,7 @@ TagManager:
   - PlayerShield
   - SpellPoint
   - Body
+  - AltSpellPoint
   layers:
   - Default
   - TransparentFX
