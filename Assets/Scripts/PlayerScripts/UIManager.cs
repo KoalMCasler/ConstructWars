@@ -46,7 +46,7 @@ public class UIManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         healthBar.maxValue = player.GetComponent<PlayerController>().ReturnMaxHP();
         healthBar.value = player.GetComponent<PlayerController>().ReturnCurrentHP();
-        shotCoolDownSlider.maxValue = player.GetComponent<PlayerController>().ReturneShotDelay();
+        shotCoolDownSlider.maxValue = player.GetComponent<PlayerController>().ReturnShotDelay();
     }
     void Update()
     {
@@ -163,18 +163,18 @@ public class UIManager : MonoBehaviour
     public void UpdateHUD()
     {
         UpdateActiveSpell();
-        shotCoolDownSlider.maxValue = player.GetComponent<PlayerController>().ReturneShotDelay();
+        shotCoolDownSlider.maxValue = player.GetComponent<PlayerController>().ReturnShotDelay();
         healthBar.maxValue = player.GetComponent<PlayerController>().playerStats.maxHP;
         healthBar.value = player.GetComponent<PlayerController>().ReturnCurrentHP();
-        abilityCoolDownSlider.maxValue = player.GetComponent<PlayerController>().altfire.abilityMaxDuration;
-        abilityCoolDownSlider.value = player.GetComponent<PlayerController>().altfire.abilityDuration;
-        shotCoolDownSlider.value = player.GetComponent<PlayerController>().ReturneShotTimer();
+        abilityCoolDownSlider.maxValue = player.GetComponent<PlayerController>().altFire.abilityMaxDuration;
+        abilityCoolDownSlider.value = player.GetComponent<PlayerController>().altFire.abilityDuration;
+        shotCoolDownSlider.value = player.GetComponent<PlayerController>().ReturnShotTimer();
     }
 
     void UpdateWorkshop()
     {
         workshopHP.text = string.Format("HP: {0}", player.GetComponent<PlayerController>().playerStats.maxHP);
-        workshopDR.text = string.Format("DR: {0}", player.GetComponent<PlayerController>().playerStats.DamageResitance);
+        workshopDR.text = string.Format("DR: {0}", player.GetComponent<PlayerController>().playerStats.DamageResistance);
         workshopDM.text = string.Format("DM: {0}", player.GetComponent<PlayerController>().playerStats.DamageModifier);
         workshopMS.text = string.Format("MS: {0}", player.GetComponent<PlayerController>().playerStats.moveSpeed);
         workshopSC.text = string.Format("CDR: {0}", player.GetComponent<PlayerController>().playerStats.SpellChargeRate);

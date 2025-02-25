@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public UIManager uIManager;
     public LevelManager levelManager;
     public PlayerController playerController;
-
+    public GameObject playerRoot;
     public GameObject player;
     public GameObject playerArt;
     

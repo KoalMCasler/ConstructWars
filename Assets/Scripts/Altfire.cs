@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Altfire : MonoBehaviour
+public class AltFire : MonoBehaviour
 {
     [Header("Managers/Objects")]
     public GameObject player;

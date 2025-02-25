@@ -8,8 +8,8 @@ public class Stats : ScriptableObject
     [Header("Core Stats")]
     public int maxHP; //Hp in game, used to determain starting HP for each match. 
     public int maxHPBase;
-    public float DamageResitance; //DR in game
-    public float DamageResitanceBase;
+    public float DamageResistance; //DR in game
+    public float DamageResistanceBase;
     public float DamageModifier; //DM in game
     public float DamageModifierBase; 
     public float SpellChargeRate; //SR in game

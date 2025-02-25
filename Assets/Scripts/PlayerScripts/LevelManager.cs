@@ -3,27 +3,45 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Cinemachine;
+using Unity.Netcode;
 
 public class LevelManager : MonoBehaviour
 {
-    public GameManager gameManager;
-    public UIManager uIManager;
+    [SerializeField]
+    private GameManager gameManager;
+    [SerializeField]
+    private UIManager uIManager;
+    [SerializeField]
+    private NetworkManager networkManager;
     public GameObject player;
     public GameObject mainCamera;
     public Collider2D foundBoundingShape;
     public CinemachineConfiner2D confiner2D;
+    private GameObject playerCopy;
+    private List<GameObject> players;
     void Start()
     {
         player = GameObject.FindWithTag("Player");
         uIManager = FindObjectOfType<UIManager>();
+    }
+
+    public void JoinServer()
+    {
+        networkManager.NetworkConfig.PlayerPrefab = gameManager.player;
+        networkManager.StartClient();
+        player.GetComponent<PlayerController>().altFire.ArenaStart();
+        gameManager.gameState = GameManager.GameState.Gameplay;
+        gameManager.ChangeGameState();
     }
     public void LoadThisScene(string sceneName)
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
         if(sceneName.StartsWith("Arena"))
         {
+            networkManager.NetworkConfig.PlayerPrefab = gameManager.player;
+            networkManager.StartHost();
             //player.GetComponent<PlayerController>().CalculateStats();
-            player.GetComponent<PlayerController>().altfire.ArenaStart();
+            player.GetComponent<PlayerController>().altFire.ArenaStart();
             gameManager.gameState = GameManager.GameState.Gameplay;
             gameManager.ChangeGameState();
         }
@@ -43,7 +61,7 @@ public class LevelManager : MonoBehaviour
         uIManager.UpdateHUD();
         if(player.GetComponent<PlayerController>().origin.originType == "Clockwork")
         {
-            player.GetComponent<PlayerController>().altfire.Activate();
+            player.GetComponent<PlayerController>().altFire.Activate();
         }
     }
 }

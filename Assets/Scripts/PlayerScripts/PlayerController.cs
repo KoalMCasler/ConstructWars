@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using Unity.Netcode;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     
-    [Header("Object Referances")]
-    public UIManager uIManager;
-    public GameManager gameManager;
+    [Header("Object References")]
+    [SerializeField]
+    private UIManager uIManager;
+    [SerializeField]
+    private GameManager gameManager;
     public GameObject Crosshair;
     public GameObject firePoint;
-    public Rigidbody2D rb;
+    private Rigidbody2D rb;
+    public GameObject mainCam;
     public Stats playerStats;
     [Header("Player Build")]
     public GameObject Body;
@@ -21,22 +25,37 @@ public class PlayerController : MonoBehaviour
     public InventoryItem utility;
     public InventoryItem mobility;
     public GameObject[] spellArray = new GameObject[3];
-    public Altfire altfire;
+    public AltFire altFire;
     [Header("Movement variables")]
     //public float moveSpeed = 5f;
     //public float maxMoveSpeed = 10f;
     public float activeMoveSpeed;
-    Vector2 moveDirection;
-    [Header("Attack/Aim Varables")]
+    private Vector2 moveDirection;
+    [Header("Attack/Aim Variables")]
     public int spellIndex;
     public Vector2 mousePosition;
-    public float ShotTimer;
+    private float ShotTimer;
     public float ShotDelay; //In seconds.
     public int fireForce;
     [Header("Stats variables")]
     public float currentHP;
     //public int maxHP;
 
+    void Start()
+    {
+        rb = this.GetComponent<Rigidbody2D>();
+    }
+    public override void OnNetworkSpawn()
+    {
+        if(!IsOwner)
+        {
+            enabled = false;
+            altFire.enabled = false;
+            mainCam.SetActive(false);
+            this.GetComponent<PlayerInput>().enabled = false;
+            return;
+        }
+    }
     void Awake()
     {
         // Starting HP
@@ -68,7 +87,7 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        // this moves the player indepented from aim direction
+        // this moves the player independent from aim direction
         rb.velocity = new Vector2(moveDirection.x * activeMoveSpeed, moveDirection.y * activeMoveSpeed);
 
         Vector2 aimDirection = mousePosition - rb.position;
@@ -79,11 +98,11 @@ public class PlayerController : MonoBehaviour
     }
     void OnFire()
     {
-        //Prevents player for fiering when pasued. 
+        //Prevents player for firing when paused. 
         if(gameManager.gameState == GameManager.GameState.Gameplay)
         {
             firePoint = GameObject.FindWithTag("SpellPoint");
-            //Lets shot only take place if cooldown has happened
+            //Lets shot only take place if cool down has happened
             if(ShotTimer >= ShotDelay)
             {
                 //Resets shot timer
@@ -95,14 +114,14 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                //Debug to tell you that cooldown is not ready
-                Debug.Log("Wait for shot cooldown.");
+                //Debug to tell you that cool down is not ready
+                Debug.Log("Wait for shot cool down.");
             }
         }
     }
     void OnAltFire()
     {
-        altfire.Activate();
+        altFire.Activate();
         Debug.Log("Alt fire triggered");
     }
     void OnCollisionEnter2D(Collision2D other)
@@ -115,7 +134,7 @@ public class PlayerController : MonoBehaviour
     }
     void TakeDamage()
     {
-        //Debug take damage funtion
+        //Debug take damage function
         currentHP -= 100;
     }
     void CheckStatus()
@@ -138,11 +157,11 @@ public class PlayerController : MonoBehaviour
     {
         //mousePosition += lookValue.Get<Vector2>();
     }
-    public float ReturneShotDelay()
+    public float ReturnShotDelay()
     {
         return ShotDelay;
     }
-    public float ReturneShotTimer()
+    public float ReturnShotTimer()
     {
         return ShotTimer;
     }
@@ -184,7 +203,7 @@ public class PlayerController : MonoBehaviour
         if(origin != null)
         {
             playerStats.maxHPBase = origin.HPMod;
-            playerStats.DamageResitanceBase = origin.DRMod;
+            playerStats.DamageResistanceBase = origin.DRMod;
             playerStats.DamageModifierBase = origin.DMMod;
             playerStats.SpellChargeRateBase = origin.CoolDownReduction;
             playerStats.LuckBase = origin.LuckMod;
@@ -199,12 +218,12 @@ public class PlayerController : MonoBehaviour
         if(heart != null)
         {
             playerStats.maxHP = playerStats.maxHPBase + heart.HPMod;
-            playerStats.DamageResitance = playerStats.DamageResitanceBase + heart.DRMod;
+            playerStats.DamageResistance = playerStats.DamageResistanceBase + heart.DRMod;
         }
         else
         {
             playerStats.maxHP = playerStats.maxHPBase;
-            playerStats.DamageResitance = playerStats.DamageResitanceBase;
+            playerStats.DamageResistance = playerStats.DamageResistanceBase;
         }
         if(utility != null)
         {
@@ -233,8 +252,8 @@ public class PlayerController : MonoBehaviour
     {
         playerStats.maxHPBase = 0;
         playerStats.maxHP = 0;
-        playerStats.DamageResitance = 0;
-        playerStats.DamageResitanceBase = 0;
+        playerStats.DamageResistance = 0;
+        playerStats.DamageResistanceBase = 0;
         playerStats.DamageModifier = 0;
         playerStats.DamageModifierBase = 0;
         playerStats.SpellChargeRate = 0;

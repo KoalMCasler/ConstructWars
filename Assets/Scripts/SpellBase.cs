@@ -112,7 +112,7 @@ public class SpellBase : MonoBehaviour
         {
             if(other.gameObject.CompareTag("Player"))
             {
-                other.gameObject.GetComponent<PlayerController>().currentHP -= ((float)spell.damage) - spell.player.GetComponent<PlayerController>().playerStats.DamageResitance;
+                other.gameObject.GetComponent<PlayerController>().currentHP -= ((float)spell.damage) - spell.player.GetComponent<PlayerController>().playerStats.DamageResistance;
                 Destroy(gameObject);
             }
             //collides with enemy
