@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using Cinemachine;
 using Unity.Netcode;
 
-public class LevelManager : MonoBehaviour
+public class LevelManager : NetworkBehaviour
 {
     [SerializeField]
     private GameManager gameManager;
@@ -25,9 +25,17 @@ public class LevelManager : MonoBehaviour
         uIManager = FindObjectOfType<UIManager>();
     }
 
+    public override void OnNetworkSpawn()
+    {
+        if(!IsOwner)
+        {
+            enabled = false;
+        }
+    }
+
     public void JoinServer()
     {
-        networkManager.NetworkConfig.PlayerPrefab = gameManager.player;
+        networkManager.NetworkConfig.PlayerPrefab = gameManager.player.transform.parent.gameObject;
         networkManager.StartClient();
         player.GetComponent<PlayerController>().altFire.ArenaStart();
         gameManager.gameState = GameManager.GameState.Gameplay;
@@ -38,7 +46,7 @@ public class LevelManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
         if(sceneName.StartsWith("Arena"))
         {
-            networkManager.NetworkConfig.PlayerPrefab = gameManager.player;
+            networkManager.NetworkConfig.PlayerPrefab = gameManager.player.transform.parent.gameObject;
             networkManager.StartHost();
             //player.GetComponent<PlayerController>().CalculateStats();
             player.GetComponent<PlayerController>().altFire.ArenaStart();

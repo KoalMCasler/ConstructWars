@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
+using Unity.Netcode;
 
-public class UIManager : MonoBehaviour
+public class UIManager : NetworkBehaviour
 {
     [Header("Managers")]
     public GameManager gameManager;
@@ -48,6 +49,15 @@ public class UIManager : MonoBehaviour
         healthBar.value = player.GetComponent<PlayerController>().ReturnCurrentHP();
         shotCoolDownSlider.maxValue = player.GetComponent<PlayerController>().ReturnShotDelay();
     }
+
+    public override void OnNetworkSpawn()
+    {
+        if(!IsOwner)
+        {
+            enabled = false;
+        }
+    }
+
     void Update()
     {
         if(HUD.activeSelf)

@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class SpellBase : MonoBehaviour
+public class SpellBase : NetworkBehaviour
 {
     public SpellComponent spell;
     public Rigidbody2D rb;
@@ -36,6 +37,13 @@ public class SpellBase : MonoBehaviour
     void Awake()
     {
         
+    }
+    public override void OnNetworkSpawn()
+    {
+        if(!IsOwner)
+        {
+            enabled = false;
+        }
     }
     // Update is called once per frame
     void Update()

@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class GameManager : MonoBehaviour
+public class GameManager : NetworkBehaviour
 {
     [Header("Object Referances")]
     public UIManager uIManager;
@@ -20,6 +21,14 @@ public class GameManager : MonoBehaviour
     {
         gameState = GameState.MainMenu;
         MainMenu();
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        if(!IsOwner)
+        {
+            enabled = false;
+        }
     }
 
     public void ChangeGameState()
